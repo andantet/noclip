@@ -23,8 +23,9 @@ public final class NoClipManagerImpl implements NoClipManager {
     }
 
     @Override
-    public void setClipping(boolean clipping) {
+    public boolean setClipping(boolean clipping) {
         this.clipping = clipping;
+        return this.clipping;
     }
 
     @Override

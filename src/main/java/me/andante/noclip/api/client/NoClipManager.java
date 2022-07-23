@@ -15,8 +15,9 @@ public interface NoClipManager {
 
     /**
      * Sets the player's clipping state.
+     * @return the new clipping value
      */
-    void setClipping(boolean clipping);
+    boolean setClipping(boolean clipping);
 
     /**
      * Updates the client's player and notifies the server of the current clipping state.
