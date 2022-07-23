@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+
+  "id": "noclip",
+  "version": "${version}",
+  "license": [
+    "MIT (Code)",
+    "All Rights Reserved (Assets)"
+  ],
+
+  "name": "noclip",
+  "icon": "assets/noclip/icon.png",
+  "description": "Adds a way to noclip in creative mode, like spectator mode",
+
+  "authors": [ "andante" ],
+  "contact": {
+    "sources": "https://github.com/andantet/noclip-fabric",
+    "issues": "https://github.com/andantet/noclip-fabric/issues"
+  },
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [ "me.andante.noclip.impl.NoClipImpl" ]
+  },
+  "mixins": [ "noclip.mixins.json" ],
+
+  "depends": {
+    "java": ">=17",
+    "minecraft": ">=1.18",
+    "fabricloader": ">=0.14",
+    "fabric": ">=0.58"
+  }
+}
