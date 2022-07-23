@@ -11,6 +11,7 @@
     "client.ClientPlayerInteractionManagerMixin",
     "client.DebugHudMixin",
     "client.EntityRenderDispatcherMixin",
+    "client.GameRendererMixin",
     "client.WorldRendererMixin"
   ],
   "injectors": {

@@ -35,6 +35,18 @@ public abstract class PlayerEntityMixin extends LivingEntity implements NoClipAc
         this.clipping = clipping;
     }
 
+    @Unique
+    @Override
+    public boolean isClippingInsideWall() {
+        if (!this.isClipping()) return false;
+
+        // love this.
+        this.noClip = false;
+        boolean insideWall = this.isInsideWall();
+        this.noClip = true;
+        return insideWall;
+    }
+
     /**
      * Updates the player's no-clip value based on our custom parameters.
      */
