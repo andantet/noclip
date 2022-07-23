@@ -10,16 +10,16 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 
 @Environment(EnvType.CLIENT)
 public final class NoClipManagerImpl implements NoClipManager {
     private boolean clipping;
+    private boolean canClip;
 
     @Override
     public boolean isClipping() {
-        return this.clipping;
+        return this.canClip && this.clipping;
     }
 
     @Override
@@ -29,17 +29,30 @@ public final class NoClipManagerImpl implements NoClipManager {
     }
 
     @Override
+    public boolean canClip() {
+        return this.canClip;
+    }
+
+    @Override
+    public void setCanClip(boolean canClip) {
+        this.canClip = canClip;
+        if (!this.canClip) this.updateClipping();
+    }
+
+    @Override
     public void updateClipping() {
+        boolean clipping = this.isClipping();
+
         // update client player
         MinecraftClient client = MinecraftClient.getInstance();
-        ClientPlayerEntity player = client.player;
-
-        NoClipAccess clippingPlayer = NoClipAccess.cast(player);
-        clippingPlayer.setClipping(this.clipping);
+        if (client.player != null) {
+            NoClipAccess clippingPlayer = NoClipAccess.cast(client.player);
+            clippingPlayer.setClipping(clipping);
+        }
 
         // send to server
         PacketByteBuf buf = PacketByteBufs.create();
-        buf.writeBoolean(this.clipping);
+        buf.writeBoolean(clipping);
         ClientPlayNetworking.send(NoClip.PACKET_ID, buf);
     }
 
@@ -49,13 +62,17 @@ public final class NoClipManagerImpl implements NoClipManager {
      * Receives a clipping update from the server.
      */
     public static void onServerUpdate(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender sender) {
-        NoClipManager.INSTANCE.setClipping(buf.readBoolean());
+        NoClipManager clipping = NoClipManager.INSTANCE;
+        clipping.setCanClip(true);
+        clipping.setClipping(buf.readBoolean());
     }
 
     /**
      * Resets clipping value upon disconnecting a server.
      */
     public static void onDisconnect(ClientPlayNetworkHandler handler, MinecraftClient client) {
-        NoClipManager.INSTANCE.setClipping(false);
+        NoClipManager clipping = NoClipManager.INSTANCE;
+        clipping.setClipping(false);
+        clipping.setCanClip(false);
     }
 }

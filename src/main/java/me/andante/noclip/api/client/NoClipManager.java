@@ -20,6 +20,16 @@ public interface NoClipManager {
     boolean setClipping(boolean clipping);
 
     /**
+     * Sets whether the client can clip.
+     */
+    void setCanClip(boolean canClip);
+
+    /**
+     * @return whether the client can clip
+     */
+    boolean canClip();
+
+    /**
      * Updates the client's player and notifies the server of the current clipping state.
      */
     void updateClipping();
