@@ -1,3 +1,6 @@
 {
-  "mod.noclip.name": "noclip"
+  "mod.noclip.name": "noclip",
+
+  "key.category.noclip": "noclip",
+  "key.noclip.toggle_noclip": "Toggle Clipping"
 }

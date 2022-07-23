@@ -20,7 +20,8 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": [ "me.andante.noclip.impl.NoClipImpl" ]
+    "main": [ "me.andante.noclip.impl.NoClipImpl" ],
+    "client": [ "me.andante.noclip.impl.client.NoClipClientImpl" ]
   },
   "mixins": [ "noclip.mixins.json" ],
 
