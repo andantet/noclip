@@ -14,6 +14,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 
 import java.util.Collection;
 import java.util.function.Predicate;
@@ -28,13 +29,18 @@ import static net.minecraft.util.math.MathHelper.*;
 @Environment(EnvType.CLIENT)
 public class NoClipHudRenderer extends DrawableHelper implements HudRenderCallback {
     public static final Identifier TEXTURE = new Identifier(NoClip.MOD_ID, "textures/gui/noclip.png");
+
+    private long fade = -1;
     private String activeDebugLine;
 
     public NoClipHudRenderer() {}
 
     @Override
     public void onHudRender(MatrixStack matrices, float tickDelta) {
-        if (!NoClipManager.INSTANCE.isClipping()) return;
+        if (!NoClipManager.INSTANCE.isClipping()) {
+            this.fade = -1;
+            return;
+        }
 
         MinecraftClient client = MinecraftClient.getInstance();
         Window window =  client.getWindow();
@@ -49,7 +55,10 @@ public class NoClipHudRenderer extends DrawableHelper implements HudRenderCallba
         RenderSystem.setShaderTexture(0, TEXTURE);
         RenderSystem.enableBlend();
 
-        float alpha = abs(sin(client.world.getTime() / 20f)) + 0.2F;
+        long ms = Util.getMeasuringTimeMs();
+        float interval = 1000f;
+        if (this.fade == -1) this.fade = ms + (long) interval;
+        float alpha = abs(sin((ms - this.fade) / interval)) + 0.2F;
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, clamp(alpha, 0.0F, 1.0F));
 
         if (client.options.debugEnabled) {
