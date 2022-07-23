@@ -33,6 +33,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements NoClipAc
     @Override
     public void setClipping(boolean clipping) {
         this.clipping = clipping;
+        this.intersectionChecked = !clipping;
     }
 
     @Unique
