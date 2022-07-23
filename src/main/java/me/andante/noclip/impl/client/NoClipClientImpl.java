@@ -2,9 +2,10 @@ package me.andante.noclip.impl.client;
 
 import com.google.common.reflect.Reflection;
 import me.andante.noclip.api.NoClip;
-import me.andante.noclip.api.client.NoClipKeybindings;
 import me.andante.noclip.api.client.NoClipManager;
+import me.andante.noclip.api.client.keybinding.NoClipKeybindings;
 import me.andante.noclip.api.client.render.NoClipHudRenderer;
+import me.andante.noclip.impl.client.keybinding.NoClipKeybindingsImpl;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
