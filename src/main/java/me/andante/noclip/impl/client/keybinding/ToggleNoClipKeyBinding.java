@@ -4,7 +4,7 @@ import me.andante.noclip.api.NoClip;
 import me.andante.noclip.api.client.NoClipManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.StickyKeyBinding;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
 import java.util.function.BooleanSupplier;
@@ -24,7 +24,7 @@ public class ToggleNoClipKeyBinding extends StickyKeyBinding {
             NoClipManager clipping = NoClipManager.INSTANCE;
             if (!clipping.canClip()) {
                 MinecraftClient client = MinecraftClient.getInstance();
-                client.player.sendMessage(new TranslatableText(ACTIONBAR_KEY).formatted(Formatting.RED), true);
+                client.player.sendMessage(Text.translatable(ACTIONBAR_KEY).formatted(Formatting.RED), true);
             }
         }
     }
