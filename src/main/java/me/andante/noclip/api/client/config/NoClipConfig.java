@@ -23,6 +23,10 @@ public class NoClipConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip(count = 2)
     public boolean flyingLocked = true;
 
+    @Comment("Whether or not to disallow clipping outside of creative mode")
+    @ConfigEntry.Gui.Tooltip(count = 2)
+    public boolean onlyCreative = true;
+
     @Comment("Whether or not the icon displayed at the top-right of the HUD is present")
     @ConfigEntry.Gui.Tooltip(count = 2)
     public boolean hudIcon = true;

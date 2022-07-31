@@ -16,7 +16,7 @@ public final class NoClipKeybindingsImpl implements NoClipKeybindings {
         NoClipManager clipping = NoClipManager.INSTANCE;
         if (clipping.canClip()) {
             boolean prev = clipping.isClipping();
-            boolean curr = TOGGLE_NOCLIP.isPressed();
+            boolean curr = TOGGLE_NOCLIP.isPressed() && !(NoClipClient.getConfig().onlyCreative && !client.interactionManager.getCurrentGameMode().isCreative());
             if (prev != curr) {
                 if (clipping.setClipping(curr)) {
                     // set flying
