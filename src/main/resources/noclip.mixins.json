@@ -5,6 +5,7 @@
   "package": "me.andante.noclip.mixin",
   "mixins": [
     "EndGatewayBlockEntityMixin",
+    "EntityMixin",
     "PlayerEntityMixin",
     "ProjectileUtilMixin"
   ],
