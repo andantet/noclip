@@ -52,6 +52,7 @@ dependencies {
 
 loom {
   runtimeOnlyLog4j = true
+  accessWidenerPath = file("src/main/resources/${project.mod_id}.accesswidener")
 }
 
 /* Data Generation */

@@ -18,6 +18,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Environment(EnvType.CLIENT)
 @Mixin(ClientPlayerEntity.class)
@@ -33,5 +34,22 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
     private void onConstructor(MinecraftClient client, ClientWorld world, ClientPlayNetworkHandler handler, StatHandler stats, ClientRecipeBook recipeBook, boolean lastSneaking, boolean lastSprinting, CallbackInfo ci) {
         NoClipAccess clippingPlayer = NoClipAccess.cast(this);
         clippingPlayer.setClipping(NoClipManager.INSTANCE.isClipping());
+    }
+
+    /**
+     * Cancels water submersion effects when clipping.
+     */
+    @Inject(
+        method = "updateWaterSubmersionState",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/network/AbstractClientPlayerEntity;updateWaterSubmersionState()Z",
+            shift = At.Shift.AFTER
+        ),
+        cancellable = true
+    )
+    private void onUpdateWaterSubmersionState(CallbackInfoReturnable<Boolean> cir) {
+        NoClipAccess clippingPlayer = NoClipAccess.cast(this);
+        if (clippingPlayer.isClipping()) cir.setReturnValue(this.isSubmergedInWater);
     }
 }

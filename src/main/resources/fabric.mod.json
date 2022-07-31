@@ -24,7 +24,9 @@
     "client": [ "me.andante.noclip.impl.client.NoClipClientImpl" ],
     "modmenu": [ "me.andante.noclip.impl.client.integration.NoClipModMenuImpl" ]
   },
+
   "mixins": [ "noclip.mixins.json" ],
+  "accessWidener": "noclip.accesswidener",
 
   "depends": {
     "java": ">=17",

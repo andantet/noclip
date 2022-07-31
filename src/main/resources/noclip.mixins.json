@@ -10,11 +10,13 @@
     "ProjectileUtilMixin"
   ],
   "client": [
+    "client.BackgroundRendererMixin",
     "client.ClientPlayerEntityMixin",
     "client.ClientPlayerInteractionManagerMixin",
     "client.DebugHudMixin",
     "client.EntityRenderDispatcherMixin",
     "client.GameRendererMixin",
+    "client.InGameOverlayRendererMixin",
     "client.WorldRendererMixin"
   ],
   "injectors": {

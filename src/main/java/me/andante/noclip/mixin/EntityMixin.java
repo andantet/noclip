@@ -15,7 +15,16 @@ public class EntityMixin {
      */
     @Inject(method = "getPistonBehavior", at = @At("HEAD"), cancellable = true)
     private void onGetPistonBehavior(CallbackInfoReturnable<PistonBehavior> cir) {
-        Entity that = Entity.class.cast(this);
+        Entity that = (Entity) (Object) this;
         if (that instanceof NoClipAccess clippingEntity && clippingEntity.isClipping()) cir.setReturnValue(PistonBehavior.IGNORE);
+    }
+
+    /**
+     * Cancels fire rendering when clipping.
+     */
+    @Inject(method = "doesRenderOnFire", at = @At("HEAD"), cancellable = true)
+    private void onDoesRenderOnFire(CallbackInfoReturnable<Boolean> cir) {
+        Entity that = (Entity) (Object) this;
+        if (that instanceof NoClipAccess clippingEntity && clippingEntity.isClipping()) cir.setReturnValue(false);
     }
 }

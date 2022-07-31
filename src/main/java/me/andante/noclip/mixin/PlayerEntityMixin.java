@@ -95,6 +95,14 @@ public abstract class PlayerEntityMixin extends LivingEntity implements NoClipAc
         if (this.isClipping()) ci.cancel();
     }
 
+    /**
+     * Cancels water interaction when clipping.
+     */
+    @Inject(method = "onSwimmingStart", at = @At("HEAD"), cancellable = true)
+    private void onOnSwimmingStart(CallbackInfo ci) {
+        if (this.isClipping()) ci.cancel();
+    }
+
     /* NBT */
 
     @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
