@@ -14,6 +14,7 @@
 
   "authors": [ "andante" ],
   "contact": {
+    "homepage": "https://curseforge.com/minecraft/mc-mods/noclip",
     "sources": "https://github.com/andantet/noclip-fabric",
     "issues": "https://github.com/andantet/noclip-fabric/issues"
   },
