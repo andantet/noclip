@@ -2,6 +2,7 @@ package me.andante.noclip.mixin;
 
 import me.andante.noclip.api.NoClip;
 import me.andante.noclip.impl.NoClipAccess;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -84,6 +85,14 @@ public abstract class PlayerEntityMixin extends LivingEntity implements NoClipAc
             this.setPose(pose);
             ci.cancel();
         }
+    }
+
+    /**
+     * Cancels any player collision code when clipping.
+     */
+    @Inject(method = "collideWithEntity", at = @At("HEAD"), cancellable = true)
+    private void onCollideWithEntity(Entity entity, CallbackInfo ci) {
+        if (this.isClipping()) ci.cancel();
     }
 
     /* NBT */
