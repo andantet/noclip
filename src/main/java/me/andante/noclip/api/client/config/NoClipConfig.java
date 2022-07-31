@@ -26,7 +26,7 @@ public class NoClipConfig implements ConfigData {
 
     @Comment("Enables bedrock-like snappy flight movement")
     @ConfigEntry.Gui.Tooltip()
-    public boolean snappyFlight = true;
+    public boolean snappyFlight = false;
 
     @Comment("Whether snappy flight needs the player to be clipping")
     @ConfigEntry.Gui.Tooltip(count = 2)
