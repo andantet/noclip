@@ -1,6 +1,6 @@
 package me.andante.noclip.mixin.client;
 
-import me.andante.noclip.impl.NoClipAccess;
+import me.andante.noclip.impl.ClippingEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.BackgroundRenderer;
@@ -29,7 +29,7 @@ public class BackgroundRendererMixin {
         locals = LocalCapture.CAPTURE_FAILHARD
     )
     private static void onApplyFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, float tickDelta, CallbackInfo ci, CameraSubmersionType submersion, Entity entity, BackgroundRenderer.FogData data) {
-        if (entity instanceof NoClipAccess clippingEntity && clippingEntity.isClipping()) {
+        if (entity instanceof ClippingEntity clippingEntity && clippingEntity.isClipping()) {
             if (submersion == CameraSubmersionType.LAVA || submersion == CameraSubmersionType.POWDER_SNOW) {
                 data.fogStart = -8.0f;
                 data.fogEnd = viewDistance * 0.5f;

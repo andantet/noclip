@@ -1,6 +1,6 @@
 package me.andante.noclip.mixin;
 
-import me.andante.noclip.impl.NoClipAccess;
+import me.andante.noclip.impl.ClippingEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,6 +24,6 @@ public class ProjectileUtilMixin {
         index = 2
     )
     private static Predicate<? super Entity> addToPredicate(Predicate<? super Entity> predicate) {
-        return predicate.and(o -> !(o instanceof NoClipAccess clippingEntity) || !clippingEntity.isClipping());
+        return predicate.and(o -> !(o instanceof ClippingEntity clippingEntity) || !clippingEntity.isClipping());
     }
 }

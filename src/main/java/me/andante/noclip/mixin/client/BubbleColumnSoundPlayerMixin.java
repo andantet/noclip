@@ -1,6 +1,6 @@
 package me.andante.noclip.mixin.client;
 
-import me.andante.noclip.impl.NoClipAccess;
+import me.andante.noclip.impl.ClippingEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -32,7 +32,7 @@ public class BubbleColumnSoundPlayerMixin {
         cancellable = true
     )
     private void onTick(CallbackInfo ci) {
-        NoClipAccess clippingPlayer = NoClipAccess.cast(this.player);
+        ClippingEntity clippingPlayer = ClippingEntity.cast(this.player);
         if (clippingPlayer.isClipping()) {
             this.hasPlayedForCurrentColumn = true;
             this.firstTick = false;

@@ -1,6 +1,6 @@
 package me.andante.noclip.mixin.client;
 
-import me.andante.noclip.impl.NoClipAccess;
+import me.andante.noclip.impl.ClippingEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -19,7 +19,7 @@ public class InGameOverlayRendererMixin {
      */
     @Inject(method = "renderOverlays", at = @At("HEAD"), cancellable = true)
     private static void onRenderOverlays(MinecraftClient client, MatrixStack matrices, CallbackInfo ci) {
-        NoClipAccess clippingPlayer = NoClipAccess.cast(client.player);
+        ClippingEntity clippingPlayer = ClippingEntity.cast(client.player);
         if (clippingPlayer.isClipping()) ci.cancel();
     }
 }

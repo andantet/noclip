@@ -2,13 +2,13 @@ package me.andante.noclip.impl;
 
 import net.minecraft.entity.player.PlayerEntity;
 
-public interface NoClipAccess {
+public interface ClippingEntity {
     boolean isClipping();
     void setClipping(boolean clipping);
 
     boolean isClippingInsideWall();
 
-    static NoClipAccess cast(PlayerEntity player) {
-        return (NoClipAccess) player;
+    static ClippingEntity cast(PlayerEntity player) {
+        return (ClippingEntity) player;
     }
 }

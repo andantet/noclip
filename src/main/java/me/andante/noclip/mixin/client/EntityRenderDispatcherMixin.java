@@ -1,6 +1,6 @@
 package me.andante.noclip.mixin.client;
 
-import me.andante.noclip.impl.NoClipAccess;
+import me.andante.noclip.impl.ClippingEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -23,7 +23,7 @@ public class EntityRenderDispatcherMixin {
     @Inject(method = "renderShadow", at = @At("HEAD"), cancellable = true)
     private static void onRenderShadow(MatrixStack matrices, VertexConsumerProvider vertices, Entity entity, float opacity, float tickDelta, WorldView world, float radius, CallbackInfo ci) {
         if (entity instanceof PlayerEntity player) {
-            NoClipAccess clippingPlayer = NoClipAccess.cast(player);
+            ClippingEntity clippingPlayer = ClippingEntity.cast(player);
             if (clippingPlayer.isClipping()) ci.cancel();
         }
     }

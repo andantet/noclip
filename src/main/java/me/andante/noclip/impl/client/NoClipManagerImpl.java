@@ -2,7 +2,7 @@ package me.andante.noclip.impl.client;
 
 import me.andante.noclip.api.NoClip;
 import me.andante.noclip.api.client.NoClipManager;
-import me.andante.noclip.impl.NoClipAccess;
+import me.andante.noclip.impl.ClippingEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -46,7 +46,7 @@ public final class NoClipManagerImpl implements NoClipManager {
         // update client player
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.player != null) {
-            NoClipAccess clippingPlayer = NoClipAccess.cast(client.player);
+            ClippingEntity clippingPlayer = ClippingEntity.cast(client.player);
             clippingPlayer.setClipping(clipping);
         }
 

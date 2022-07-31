@@ -1,7 +1,7 @@
 package me.andante.noclip.mixin;
 
 import me.andante.noclip.api.NoClip;
-import me.andante.noclip.impl.NoClipAccess;
+import me.andante.noclip.impl.ClippingEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin extends LivingEntity implements NoClipAccess {
+public abstract class PlayerEntityMixin extends LivingEntity implements ClippingEntity {
     @Unique private boolean clipping;
 
     private PlayerEntityMixin(EntityType<? extends LivingEntity> type, World world) {

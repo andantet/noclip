@@ -1,6 +1,6 @@
 package me.andante.noclip.mixin;
 
-import me.andante.noclip.impl.NoClipAccess;
+import me.andante.noclip.impl.ClippingEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.predicate.entity.EntityPredicates;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,7 +17,7 @@ public class EntityPredicatesMixin {
     @Inject(method = "method_32878", at = @At("TAIL"), cancellable = true)
     private static void onValidLivingEntity(Entity entity, CallbackInfoReturnable<Boolean> cir) {
         if (cir.getReturnValueZ()) {
-            if (entity instanceof NoClipAccess clippingEntity && clippingEntity.isClipping()) cir.setReturnValue(false);
+            if (entity instanceof ClippingEntity clippingEntity && clippingEntity.isClipping()) cir.setReturnValue(false);
         }
     }
 }

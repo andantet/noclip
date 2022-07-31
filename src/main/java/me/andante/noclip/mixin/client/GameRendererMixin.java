@@ -1,6 +1,6 @@
 package me.andante.noclip.mixin.client;
 
-import me.andante.noclip.impl.NoClipAccess;
+import me.andante.noclip.impl.ClippingEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -28,7 +28,7 @@ public class GameRendererMixin {
         index = 4
     )
     private int onRenderHandFixLight(int light) {
-        NoClipAccess clippingPlayer = NoClipAccess.cast(this.client.player);
+        ClippingEntity clippingPlayer = ClippingEntity.cast(this.client.player);
         return clippingPlayer.isClippingInsideWall() ? 0xFFFFFF : light;
     }
 }

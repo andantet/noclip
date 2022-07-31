@@ -2,7 +2,7 @@ package me.andante.noclip.mixin.client;
 
 import com.mojang.authlib.GameProfile;
 import me.andante.noclip.api.client.NoClipManager;
-import me.andante.noclip.impl.NoClipAccess;
+import me.andante.noclip.impl.ClippingEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -32,7 +32,7 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
      */
     @Inject(method = "<init>", at = @At("TAIL"))
     private void onConstructor(MinecraftClient client, ClientWorld world, ClientPlayNetworkHandler handler, StatHandler stats, ClientRecipeBook recipeBook, boolean lastSneaking, boolean lastSprinting, CallbackInfo ci) {
-        NoClipAccess clippingPlayer = NoClipAccess.cast(this);
+        ClippingEntity clippingPlayer = ClippingEntity.cast(this);
         clippingPlayer.setClipping(NoClipManager.INSTANCE.isClipping());
     }
 
@@ -49,7 +49,7 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
         cancellable = true
     )
     private void onUpdateWaterSubmersionState(CallbackInfoReturnable<Boolean> cir) {
-        NoClipAccess clippingPlayer = NoClipAccess.cast(this);
+        ClippingEntity clippingPlayer = ClippingEntity.cast(this);
         if (clippingPlayer.isClipping()) cir.setReturnValue(this.isSubmergedInWater);
     }
 }

@@ -28,7 +28,7 @@ public final class NoClipImpl implements NoClip, ModInitializer {
      */
     private void onPlayerJoin(ServerPlayNetworkHandler handler, PacketSender sender, MinecraftServer server) {
         PacketByteBuf buf = PacketByteBufs.create();
-        NoClipAccess clippingPlayer = NoClipAccess.cast(handler.player);
+        ClippingEntity clippingPlayer = ClippingEntity.cast(handler.player);
         buf.writeBoolean(clippingPlayer.isClipping());
         ServerPlayNetworking.send(handler.player, PACKET_ID, buf);
     }
@@ -38,7 +38,7 @@ public final class NoClipImpl implements NoClip, ModInitializer {
      */
     private void receiveUpdate(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender sender) {
         boolean clipping = buf.readBoolean();
-        NoClipAccess clippingPlayer = NoClipAccess.cast(player);
+        ClippingEntity clippingPlayer = ClippingEntity.cast(player);
         clippingPlayer.setClipping(clipping);
     }
 
@@ -46,8 +46,8 @@ public final class NoClipImpl implements NoClip, ModInitializer {
      * Copies data from a dead player to a new player.
      */
     private void copyFrom(ServerPlayerEntity oldPlayer, ServerPlayerEntity newPlayer, boolean alive) {
-        NoClipAccess clippingOldPlayer = NoClipAccess.cast(oldPlayer);
-        NoClipAccess clippingNewPlayer = NoClipAccess.cast(newPlayer);
+        ClippingEntity clippingOldPlayer = ClippingEntity.cast(oldPlayer);
+        ClippingEntity clippingNewPlayer = ClippingEntity.cast(newPlayer);
         clippingNewPlayer.setClipping(clippingOldPlayer.isClipping());
     }
 }
