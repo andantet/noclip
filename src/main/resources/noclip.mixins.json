@@ -6,6 +6,7 @@
   "mixins": [
     "EndGatewayBlockEntityMixin",
     "EntityMixin",
+    "EntityPredicatesMixin",
     "PlayerEntityMixin",
     "ProjectileUtilMixin"
   ],
