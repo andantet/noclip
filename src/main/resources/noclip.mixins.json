@@ -11,6 +11,7 @@
   ],
   "client": [
     "client.BackgroundRendererMixin",
+    "client.BubbleColumnSoundPlayerMixin",
     "client.ClientPlayerEntityMixin",
     "client.ClientPlayerInteractionManagerMixin",
     "client.DebugHudMixin",
