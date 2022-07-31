@@ -36,6 +36,10 @@ public class NoClipConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip(count = 2)
     public boolean onlyCreative = true;
 
+    @Comment("Whether or not the creative mode flight speed key binding toggles speed scrolling")
+    @ConfigEntry.Gui.Tooltip(count = 2)
+    public boolean toggleCreativeFlightSpeed = false;
+
     @Comment("Whether or not the icon displayed at the top-right of the HUD is present")
     @ConfigEntry.Gui.Tooltip(count = 2)
     public boolean hudIcon = true;

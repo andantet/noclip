@@ -19,6 +19,7 @@
     "client.EntityRenderDispatcherMixin",
     "client.GameRendererMixin",
     "client.InGameOverlayRendererMixin",
+    "client.MouseMixin",
     "client.WorldRendererMixin"
   ],
   "injectors": {

@@ -2,11 +2,15 @@
   "mod.noclip.name": "noclip",
 
   "text.noclip.server_noclip_not_present": "[noclip] You cannot clip on this server",
+  "text.noclip.config_reload_successful": "[noclip] Config reloaded successfully",
+
+  "text.noclip.flight_speed.set": "[noclip] Set flight speed to %s",
+  "text.noclip.flight_speed.reset": "[noclip] Reset flight speed to %s",
 
   "key.category.noclip": "noclip",
   "key.noclip.toggle_noclip": "Toggle Clipping",
-
-  "text.noclip.config_reload_successful": "[noclip] Config reloaded successfully",
+  "key.noclip.enable_creative_flight_speed_scroll": "Enable Creative Flight Speed Scroll",
+  "key.noclip.reset_flight_speed": "Reset Flight Speed",
 
   "text.autoconfig.noclip.title": "noclip",
   "text.autoconfig.noclip.option.enableFlightOnClip": "Enable Flight on Clip",
@@ -23,6 +27,9 @@
   "text.autoconfig.noclip.option.onlyCreative": "Only Creative",
   "text.autoconfig.noclip.option.onlyCreative.@Tooltip[0]": "Whether or not to disallow clipping",
   "text.autoconfig.noclip.option.onlyCreative.@Tooltip[1]": "outside of creative mode",
+  "text.autoconfig.noclip.option.toggleCreativeFlightSpeed": "Toggle Creative Flight Speed",
+  "text.autoconfig.noclip.option.toggleCreativeFlightSpeed.@Tooltip[0]": "Whether or not the creative mode flight",
+  "text.autoconfig.noclip.option.toggleCreativeFlightSpeed.@Tooltip[1]": "speed key binding toggles speed scrolling",
   "text.autoconfig.noclip.option.hudIcon": "Enable HUD Icon",
   "text.autoconfig.noclip.option.hudIcon.@Tooltip[0]": "Whether or not the icon displayed at",
   "text.autoconfig.noclip.option.hudIcon.@Tooltip[1]": "the top-right of the HUD is present"
