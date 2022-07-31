@@ -8,7 +8,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.option.StickyKeyBinding;
-import org.lwjgl.glfw.GLFW;
+import net.minecraft.client.util.InputUtil;
 
 @Environment(EnvType.CLIENT)
 public interface NoClipKeybindings {
@@ -16,15 +16,15 @@ public interface NoClipKeybindings {
 
     KeyBinding TOGGLE_NOCLIP = KeyBindingHelper.registerKeyBinding(new ToggleNoClipKeyBinding(
         "key." + NoClip.MOD_ID + ".toggle_noclip",
-        GLFW.GLFW_KEY_GRAVE_ACCENT, CATEGORY, () -> true
+        InputUtil.GLFW_KEY_GRAVE_ACCENT, CATEGORY, () -> true
     ));
 
     KeyBinding ENABLE_CREATIVE_FLIGHT_SPEED_SCROLL = KeyBindingHelper.registerKeyBinding(new StickyKeyBinding(
         "key." + NoClip.MOD_ID + ".enable_creative_flight_speed_scroll",
-        GLFW.GLFW_KEY_UNKNOWN, CATEGORY, () -> NoClipClient.getConfig().toggleCreativeFlightSpeed
+        InputUtil.UNKNOWN_KEY.getCode(), CATEGORY, () -> NoClipClient.getConfig().toggleCreativeFlightSpeed
     ));
 
     KeyBinding RESET_FLIGHT_SPEED = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-        "key." + NoClip.MOD_ID + ".reset_flight_speed", GLFW.GLFW_KEY_UNKNOWN, CATEGORY
+        "key." + NoClip.MOD_ID + ".reset_flight_speed", InputUtil.UNKNOWN_KEY.getCode(), CATEGORY
     ));
 }
