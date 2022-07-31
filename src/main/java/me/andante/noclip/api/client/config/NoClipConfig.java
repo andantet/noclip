@@ -15,6 +15,10 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 @Environment(EnvType.CLIENT)
 @Config(name = NoClip.MOD_ID)
 public class NoClipConfig implements ConfigData {
+    @Comment("Whether to enable flight when entering clipping mode")
+    @ConfigEntry.Gui.Tooltip(count = 2)
+    public boolean enableFlightOnClip = true;
+
     @Comment("Whether the player is locked flying when clipping")
     @ConfigEntry.Gui.Tooltip(count = 2)
     public boolean flyingLocked = true;

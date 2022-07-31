@@ -1,5 +1,6 @@
 package me.andante.noclip.impl.client.keybinding;
 
+import me.andante.noclip.api.client.NoClipClient;
 import me.andante.noclip.api.client.NoClipManager;
 import me.andante.noclip.api.client.keybinding.NoClipKeybindings;
 import net.fabricmc.api.EnvType;
@@ -19,9 +20,12 @@ public final class NoClipKeybindingsImpl implements NoClipKeybindings {
             if (prev != curr) {
                 if (clipping.setClipping(curr)) {
                     // set flying
-                    PlayerAbilities abilities = client.player.getAbilities();
-                    if (abilities.allowFlying) abilities.flying = true;
+                    if (NoClipClient.getConfig().enableFlightOnClip) {
+                        PlayerAbilities abilities = client.player.getAbilities();
+                        if (abilities.allowFlying) abilities.flying = true;
+                    }
                 }
+
                 clipping.updateClipping();
             }
         }

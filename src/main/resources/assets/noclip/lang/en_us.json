@@ -8,6 +8,9 @@
 
   "text.autoconfig.noclip.title": "noclip",
   "text.autoconfig.noclip.option.flyingLocked": "Lock Flying when Clipping",
+  "text.autoconfig.noclip.option.enableFlightOnClip": "Enable Flight on Clip",
+  "text.autoconfig.noclip.option.enableFlightOnClip.@Tooltip[0]": "Whether to enable flight when entering",
+  "text.autoconfig.noclip.option.enableFlightOnClip.@Tooltip[1]": "clipping mode",
   "text.autoconfig.noclip.option.flyingLocked.@Tooltip[0]": "Whether the player is locked to fly",
   "text.autoconfig.noclip.option.flyingLocked.@Tooltip[1]": "when clipping",
   "text.autoconfig.noclip.option.hudIcon": "Enable HUD Icon",
