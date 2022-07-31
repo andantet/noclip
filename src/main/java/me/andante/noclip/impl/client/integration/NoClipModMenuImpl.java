@@ -4,7 +4,6 @@ import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.andante.noclip.api.client.NoClipClient;
 import me.andante.noclip.api.client.config.NoClipConfig;
-import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
@@ -12,6 +11,6 @@ import net.fabricmc.api.Environment;
 public class NoClipModMenuImpl implements NoClipClient, ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return screen -> AutoConfig.getConfigScreen(NoClipConfig.class, screen).get();
+        return NoClipConfig::createScreen;
     }
 }

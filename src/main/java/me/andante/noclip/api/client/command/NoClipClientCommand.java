@@ -9,6 +9,7 @@ import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.*;
@@ -21,6 +22,7 @@ public interface NoClipClientCommand {
         dispatcher.register(literal(NoClip.MOD_ID)
             .executes(NoClipClientCommand::execute)
             .then(literal("config")
+                .executes(NoClipClientCommand::executeConfig)
                 .then(literal("reload")
                     .executes(NoClipClientCommand::executeConfigReload)
                 )
@@ -31,6 +33,13 @@ public interface NoClipClientCommand {
     static int execute(CommandContext<FabricClientCommandSource> context) {
         NoClipKeybindings.TOGGLE_NOCLIP.setPressed(true);
         return !NoClipKeybindings.TOGGLE_NOCLIP.isPressed() ? 1 : 0;
+    }
+
+    static int executeConfig(CommandContext<FabricClientCommandSource> context) {
+        FabricClientCommandSource source = context.getSource();
+        MinecraftClient client = source.getClient();
+        client.send(() -> client.setScreen(NoClipConfig.createScreen(client.currentScreen)));
+        return 1;
     }
 
     static int executeConfigReload(CommandContext<FabricClientCommandSource> context) {

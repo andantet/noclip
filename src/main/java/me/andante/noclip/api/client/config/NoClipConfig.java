@@ -11,6 +11,7 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.minecraft.client.gui.screen.Screen;
 
 @Environment(EnvType.CLIENT)
 @Config(name = NoClip.MOD_ID)
@@ -34,5 +35,9 @@ public class NoClipConfig implements ConfigData {
     public static ConfigHolder<NoClipConfig> initialize() {
         ServerLifecycleEvents.START_DATA_PACK_RELOAD.register((server, manager) -> AutoConfig.getConfigHolder(NoClipConfig.class).load());
         return AutoConfig.register(NoClipConfig.class, JanksonConfigSerializer::new);
+    }
+
+    public static Screen createScreen(Screen parent) {
+        return AutoConfig.getConfigScreen(NoClipConfig.class, parent).get();
     }
 }
