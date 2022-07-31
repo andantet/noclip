@@ -21,7 +21,7 @@ public interface NoClipKeybindings {
 
     KeyBinding ENABLE_CREATIVE_FLIGHT_SPEED_SCROLL = KeyBindingHelper.registerKeyBinding(new StickyKeyBinding(
         "key." + NoClip.MOD_ID + ".enable_creative_flight_speed_scroll",
-        GLFW.GLFW_KEY_LEFT_CONTROL, CATEGORY, () -> NoClipClient.getConfig().toggleCreativeFlightSpeed
+        GLFW.GLFW_KEY_UNKNOWN, CATEGORY, () -> NoClipClient.getConfig().toggleCreativeFlightSpeed
     ));
 
     KeyBinding RESET_FLIGHT_SPEED = KeyBindingHelper.registerKeyBinding(new KeyBinding(
