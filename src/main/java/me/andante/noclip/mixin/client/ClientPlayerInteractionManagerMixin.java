@@ -1,5 +1,7 @@
 package me.andante.noclip.mixin.client;
 
+import me.andante.noclip.api.client.NoClipClient;
+import me.andante.noclip.api.client.NoClipManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
@@ -16,6 +18,6 @@ public class ClientPlayerInteractionManagerMixin {
      */
     @Inject(method = "isFlyingLocked", at = @At("HEAD"), cancellable = true)
     private void onIsFlyingLocked(CallbackInfoReturnable<Boolean> cir) {
-        // if (NoClipManager.INSTANCE.isClipping()) cir.setReturnValue(true);
+        if (NoClipManager.INSTANCE.isClipping() && NoClipClient.getConfig().flyingLocked) cir.setReturnValue(true);
     }
 }

@@ -4,5 +4,13 @@
   "text.noclip.server_noclip_not_present": "[noclip] You cannot clip on this server",
 
   "key.category.noclip": "noclip",
-  "key.noclip.toggle_noclip": "Toggle Clipping"
+  "key.noclip.toggle_noclip": "Toggle Clipping",
+
+  "text.autoconfig.noclip.title": "noclip",
+  "text.autoconfig.noclip.option.flyingLocked": "Lock Flying when Clipping",
+  "text.autoconfig.noclip.option.flyingLocked.@Tooltip[0]": "Whether the player is locked to fly",
+  "text.autoconfig.noclip.option.flyingLocked.@Tooltip[1]": "when clipping",
+  "text.autoconfig.noclip.option.hudIcon": "Enable HUD Icon",
+  "text.autoconfig.noclip.option.hudIcon.@Tooltip[0]": "Whether or not the icon displayed at",
+  "text.autoconfig.noclip.option.hudIcon.@Tooltip[1]": "the top-right of the HUD is present"
 }

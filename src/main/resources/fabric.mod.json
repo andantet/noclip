@@ -21,7 +21,8 @@
   "environment": "*",
   "entrypoints": {
     "main": [ "me.andante.noclip.impl.NoClipImpl" ],
-    "client": [ "me.andante.noclip.impl.client.NoClipClientImpl" ]
+    "client": [ "me.andante.noclip.impl.client.NoClipClientImpl" ],
+    "modmenu": [ "me.andante.noclip.impl.client.integration.NoClipModMenuImpl" ]
   },
   "mixins": [ "noclip.mixins.json" ],
 
@@ -29,6 +30,7 @@
     "java": ">=17",
     "minecraft": ">=1.19",
     "fabricloader": ">=0.14",
-    "fabric": ">=0.58"
+    "fabric": ">=0.58",
+    "cloth-config": ">=8.0"
   }
 }

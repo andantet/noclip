@@ -2,6 +2,7 @@ package me.andante.noclip.api.client.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.andante.noclip.api.NoClip;
+import me.andante.noclip.api.client.NoClipClient;
 import me.andante.noclip.api.client.NoClipManager;
 import me.andante.noclip.impl.client.NoClipClientImpl;
 import net.fabricmc.api.EnvType;
@@ -23,8 +24,7 @@ import static net.minecraft.util.math.MathHelper.*;
 
 /**
  * Responsible for rendering an indicator on the hud of the player's current clipping state.
- *
- * The current instance used by the client can be obtained by {@link NoClipClientImpl#NOCLIP_HUD_RENDERER}.
+ * <p>The current instance used by the client can be obtained by {@link NoClipClientImpl#NOCLIP_HUD_RENDERER}.</p>
  */
 @Environment(EnvType.CLIENT)
 public class NoClipHudRenderer extends DrawableHelper implements HudRenderCallback {
@@ -37,7 +37,7 @@ public class NoClipHudRenderer extends DrawableHelper implements HudRenderCallba
 
     @Override
     public void onHudRender(MatrixStack matrices, float tickDelta) {
-        if (!NoClipManager.INSTANCE.isClipping()) {
+        if (!NoClipManager.INSTANCE.isClipping() || !NoClipClient.getConfig().hudIcon) {
             this.fade = -1;
             return;
         }
