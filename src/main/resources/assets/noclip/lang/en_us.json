@@ -6,6 +6,8 @@
   "key.category.noclip": "noclip",
   "key.noclip.toggle_noclip": "Toggle Clipping",
 
+  "text.noclip.config_reload_successful": "[noclip] Config reloaded successfully",
+
   "text.autoconfig.noclip.title": "noclip",
   "text.autoconfig.noclip.option.flyingLocked": "Lock Flying when Clipping",
   "text.autoconfig.noclip.option.enableFlightOnClip": "Enable Flight on Clip",
