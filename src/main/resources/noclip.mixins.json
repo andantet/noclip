@@ -7,6 +7,7 @@
     "EndGatewayBlockEntityMixin",
     "EntityMixin",
     "EntityPredicatesMixin",
+    "ExplosionMixin",
     "GameModeMixin",
     "PlayerAbilitiesMixin",
     "PlayerEntityMixin",
