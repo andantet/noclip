@@ -1,15 +1,22 @@
 package me.andante.noclip.mixin;
 
+import com.mojang.authlib.GameProfile;
 import me.andante.noclip.api.NoClip;
 import me.andante.noclip.impl.ClippingEntity;
+import me.andante.noclip.impl.PlayerAbilitiesAccess;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.encryption.PlayerPublicKey;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,6 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity implements ClippingEntity {
+    @Shadow @Final private PlayerAbilities abilities;
     @Unique private boolean clipping;
 
     private PlayerEntityMixin(EntityType<? extends LivingEntity> type, World world) {
@@ -50,7 +58,16 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Clipping
     }
 
     /**
-     * Updates the player's no-clip value based on our custom parameters.
+     * Attaches the player to their {@link #abilities}.
+     */
+    @Inject(method = "<init>", at = @At("TAIL"))
+    private void onInit(World world, BlockPos pos, float yaw, GameProfile profile, PlayerPublicKey key, CallbackInfo ci) {
+        PlayerEntity that = (PlayerEntity) (Object) this;
+        ((PlayerAbilitiesAccess) this.abilities).setPlayer(that);
+    }
+
+    /**
+     * Updates the player's clipping value based on our custom parameters.
      */
     @Inject(
         method = "tick",
@@ -68,7 +85,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Clipping
     }
 
     /**
-     * Prevents the player's post from updating when no-clipping.
+     * Prevents the player's pose from updating when noclipping.
      */
     @Inject(
         method = "updatePose",

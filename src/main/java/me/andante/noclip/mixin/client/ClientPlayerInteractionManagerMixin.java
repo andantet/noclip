@@ -18,6 +18,6 @@ public class ClientPlayerInteractionManagerMixin {
      */
     @Inject(method = "isFlyingLocked", at = @At("HEAD"), cancellable = true)
     private void onIsFlyingLocked(CallbackInfoReturnable<Boolean> cir) {
-        if (NoClipManager.INSTANCE.isClipping() && NoClipClient.getConfig().flyingLocked) cir.setReturnValue(true);
+        if (NoClipManager.INSTANCE.isClipping() && NoClipClient.getConfig().flight.flyingLocked) cir.setReturnValue(true);
     }
 }

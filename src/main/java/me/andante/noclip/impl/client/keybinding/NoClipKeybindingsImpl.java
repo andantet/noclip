@@ -4,7 +4,9 @@ import me.andante.noclip.api.NoClip;
 import me.andante.noclip.api.client.NoClipClient;
 import me.andante.noclip.api.client.NoClipManager;
 import me.andante.noclip.api.client.config.NoClipConfig;
+import me.andante.noclip.api.client.config.NoClipConfig.AllowIn;
 import me.andante.noclip.api.client.keybinding.NoClipKeybindings;
+import me.shedaniel.autoconfig.ConfigHolder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -12,41 +14,50 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.GameMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public final class NoClipKeybindingsImpl implements NoClipKeybindings {
     public static final String RESET_FLIGHT_SPEED_KEY = "text." + NoClip.MOD_ID + ".flight_speed.reset";
+    private static List<GameMode> allowedModes = createAllowedModes(NoClipClient.CONFIG.getConfig().allowIn);
 
     public static void onEndClientTick(MinecraftClient client) {
         ClientPlayerEntity player = client.player;
         if (player == null) return;
 
         NoClipConfig config = NoClipClient.getConfig();
+        NoClipConfig.Flight flightConfig = config.flight;
         PlayerAbilities abilities = player.getAbilities();
 
         /* Clipping */
 
         NoClipManager clipping = NoClipManager.INSTANCE;
         if (clipping.canClip()) {
+            GameMode mode = client.interactionManager.getCurrentGameMode();
             boolean prev = clipping.isClipping();
-            boolean curr = TOGGLE_NOCLIP.isPressed() && !(config.onlyCreative && !client.interactionManager.getCurrentGameMode().isCreative());
+            boolean curr = TOGGLE_NOCLIP.isPressed() && allowedModes.contains(mode);
             if (prev != curr) {
-                if (clipping.setClipping(curr)) {
+                clipping.setClipping(curr);
+                clipping.updateClipping();
+
+                if (curr) {
                     // set flying
-                    if (config.enableFlightOnClip) {
-                        if (abilities.allowFlying) abilities.flying = true;
-                    }
+                    if (flightConfig.enableFlightOnClip) abilities.flying = true;
                 }
 
-                clipping.updateClipping();
+                mode.setAbilities(abilities);
             }
         }
 
         /* Snappy Flight */
 
         if (abilities.flying) {
-            if (config.snappyFlight && (!config.snappyFlightRequiresClipping || clipping.isClipping())) {
+            if (flightConfig.snappyFlight.enabled && (!flightConfig.snappyFlight.onlyInNoClip || clipping.isClipping())) {
                 player.setVelocity(Vec3d.ZERO);
 
                 int sideways = 0;
@@ -72,7 +83,21 @@ public final class NoClipKeybindingsImpl implements NoClipKeybindings {
         if (RESET_FLIGHT_SPEED.wasPressed()) {
             PlayerAbilities def = new PlayerAbilities();
             abilities.setFlySpeed(def.getFlySpeed());
-            player.sendMessage(Text.translatable(RESET_FLIGHT_SPEED_KEY, 1.0f), true);
+            player.sendMessage(Text.translatable(RESET_FLIGHT_SPEED_KEY, 1.0f).setStyle(NoClipClient.getTextStyle()), true);
         }
+    }
+
+    public static ActionResult onConfigSave(ConfigHolder<NoClipConfig> holder, NoClipConfig config) {
+        allowedModes = createAllowedModes(config.allowIn);
+        return ActionResult.PASS;
+    }
+
+    private static List<GameMode> createAllowedModes(AllowIn allow) {
+        List<GameMode> list = new ArrayList<>();
+        if (allow.creative) list.add(GameMode.CREATIVE);
+        if (allow.survival) list.add(GameMode.SURVIVAL);
+        if (allow.adventure) list.add(GameMode.ADVENTURE);
+        if (allow.spectator) list.add(GameMode.SPECTATOR);
+        return list;
     }
 }

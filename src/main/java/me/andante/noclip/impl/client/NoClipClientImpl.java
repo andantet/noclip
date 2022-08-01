@@ -23,6 +23,8 @@ public final class NoClipClientImpl implements NoClipClient, ClientModInitialize
     @SuppressWarnings("UnstableApiUsage")
     @Override
     public void onInitializeClient() {
+        LOGGER.info("Initializing {}-CLIENT", MOD_NAME);
+
         Reflection.initialize(NoClipClient.class, NoClipKeybindings.class, NoClipManager.class);
 
         // networking

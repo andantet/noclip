@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(WorldRenderer.class)
 public class WorldRendererMixin {
     /**
-     * Modifies an argument of setupTerrain to make the world render as if the player is in spectator when no-clipping.
+     * Modifies an argument of setupTerrain to make the world render as if the player is in spectator when clipping.
      */
     @ModifyArg(
         method = "render",

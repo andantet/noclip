@@ -2,6 +2,8 @@ package me.andante.noclip.api.client.keybinding;
 
 import me.andante.noclip.api.NoClip;
 import me.andante.noclip.api.client.NoClipClient;
+import me.andante.noclip.api.client.config.KeyBehavior;
+import me.andante.noclip.api.client.config.NoClipConfig;
 import me.andante.noclip.impl.client.keybinding.ToggleNoClipKeyBinding;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -10,21 +12,28 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.option.StickyKeyBinding;
 import net.minecraft.client.util.InputUtil;
 
+import java.util.function.BooleanSupplier;
+import java.util.function.Function;
+
 @Environment(EnvType.CLIENT)
 public interface NoClipKeybindings {
     String CATEGORY = "key.category." + NoClip.MOD_ID;
 
     KeyBinding TOGGLE_NOCLIP = KeyBindingHelper.registerKeyBinding(new ToggleNoClipKeyBinding(
         "key." + NoClip.MOD_ID + ".toggle_noclip",
-        InputUtil.GLFW_KEY_GRAVE_ACCENT, CATEGORY, () -> true
+        InputUtil.GLFW_KEY_GRAVE_ACCENT, CATEGORY, toggles(behaviors -> behaviors.noClip)
     ));
 
-    KeyBinding ENABLE_CREATIVE_FLIGHT_SPEED_SCROLL = KeyBindingHelper.registerKeyBinding(new StickyKeyBinding(
-        "key." + NoClip.MOD_ID + ".enable_creative_flight_speed_scroll",
-        InputUtil.UNKNOWN_KEY.getCode(), CATEGORY, () -> NoClipClient.getConfig().toggleCreativeFlightSpeed
+    KeyBinding ACTIVATE_FLIGHT_SPEED_SCROLL = KeyBindingHelper.registerKeyBinding(new StickyKeyBinding(
+        "key." + NoClip.MOD_ID + ".activate_flight_speed_scroll",
+        InputUtil.UNKNOWN_KEY.getCode(), CATEGORY, toggles(behaviors -> behaviors.flightSpeedActivation)
     ));
 
     KeyBinding RESET_FLIGHT_SPEED = KeyBindingHelper.registerKeyBinding(new KeyBinding(
         "key." + NoClip.MOD_ID + ".reset_flight_speed", InputUtil.UNKNOWN_KEY.getCode(), CATEGORY
     ));
+
+    private static BooleanSupplier toggles(Function<NoClipConfig.KeyBehaviors, KeyBehavior> getter) {
+        return () -> getter.apply(NoClipClient.getConfig().keyBehaviors).toggles();
+    }
 }

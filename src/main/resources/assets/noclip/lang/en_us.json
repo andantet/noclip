@@ -3,34 +3,59 @@
 
   "text.noclip.server_noclip_not_present": "[noclip] You cannot clip on this server",
   "text.noclip.config_reload_successful": "[noclip] Config reloaded successfully",
+  "text.noclip.config_reload_syntax_error": "[noclip] Error loading config: syntax error, check your logs",
 
-  "text.noclip.flight_speed.set": "[noclip] Set flight speed to %s",
-  "text.noclip.flight_speed.reset": "[noclip] Reset flight speed to %s",
+  "text.noclip.flight_speed.set": "[noclip] Speed: %sx",
+  "text.noclip.flight_speed.reset": "[noclip] Speed: %sx (reset)",
 
   "key.category.noclip": "noclip",
   "key.noclip.toggle_noclip": "Toggle Clipping",
-  "key.noclip.enable_creative_flight_speed_scroll": "Enable Creative Flight Speed Scroll",
+  "key.noclip.activate_flight_speed_scroll": "Activate Flight Speed Scroll",
   "key.noclip.reset_flight_speed": "Reset Flight Speed",
 
   "text.autoconfig.noclip.title": "noclip",
-  "text.autoconfig.noclip.option.enableFlightOnClip": "Enable Flight on Clip",
-  "text.autoconfig.noclip.option.enableFlightOnClip.@Tooltip[0]": "Whether to enable flight when entering",
-  "text.autoconfig.noclip.option.enableFlightOnClip.@Tooltip[1]": "clipping mode",
-  "text.autoconfig.noclip.option.flyingLocked": "Lock Flying when Clipping",
-  "text.autoconfig.noclip.option.flyingLocked.@Tooltip[0]": "Whether the player is locked to fly",
-  "text.autoconfig.noclip.option.flyingLocked.@Tooltip[1]": "when clipping",
-  "text.autoconfig.noclip.option.snappyFlight": "Snappy Flight",
-  "text.autoconfig.noclip.option.snappyFlight.@Tooltip": "Enables bedrock-like snappy flight movement",
-  "text.autoconfig.noclip.option.snappyFlightRequiresClipping": "   - Requires Clipping",
-  "text.autoconfig.noclip.option.snappyFlightRequiresClipping.@Tooltip[0]": "Whether snappy flight needs the player",
-  "text.autoconfig.noclip.option.snappyFlightRequiresClipping.@Tooltip[1]": "to be clipping",
-  "text.autoconfig.noclip.option.onlyCreative": "Only Creative",
-  "text.autoconfig.noclip.option.onlyCreative.@Tooltip[0]": "Whether or not to disallow clipping",
-  "text.autoconfig.noclip.option.onlyCreative.@Tooltip[1]": "outside of creative mode",
-  "text.autoconfig.noclip.option.toggleCreativeFlightSpeed": "Toggle Creative Flight Speed",
-  "text.autoconfig.noclip.option.toggleCreativeFlightSpeed.@Tooltip[0]": "Whether or not the creative mode flight",
-  "text.autoconfig.noclip.option.toggleCreativeFlightSpeed.@Tooltip[1]": "speed key binding toggles speed scrolling",
+
   "text.autoconfig.noclip.option.hudIcon": "Enable HUD Icon",
   "text.autoconfig.noclip.option.hudIcon.@Tooltip[0]": "Whether or not the icon displayed at",
-  "text.autoconfig.noclip.option.hudIcon.@Tooltip[1]": "the top-right of the HUD is present"
+  "text.autoconfig.noclip.option.hudIcon.@Tooltip[1]": "the top-right of the HUD is present",
+
+  "text.autoconfig.noclip.option.flight": "Flight",
+
+  "text.autoconfig.noclip.option.flight.snappyFlight": "Snappy Flight",
+  "text.autoconfig.noclip.option.flight.snappyFlight.@Tooltip": "Enables bedrock-like snappy flight movement",
+
+  "text.autoconfig.noclip.option.flight.snappyFlight.enabled": "Enabled",
+
+  "text.autoconfig.noclip.option.flight.snappyFlight.onlyInNoClip": "Only In Noclip",
+  "text.autoconfig.noclip.option.flight.snappyFlight.onlyInNoClip.@Tooltip[0]": "Whether snappy flight is only active",
+  "text.autoconfig.noclip.option.flight.snappyFlight.onlyInNoClip.@Tooltip[1]": "when the player is in noclip",
+
+  "text.autoconfig.noclip.option.flight.maxScrolledSpeed": "Max Scrolled Speed",
+  "text.autoconfig.noclip.option.flight.maxScrolledSpeed.@Tooltip[0]": "The maximum value the flight speed",
+  "text.autoconfig.noclip.option.flight.maxScrolledSpeed.@Tooltip[1]": "scroll can be set to",
+
+  "text.autoconfig.noclip.option.flight.enableFlightOnClip": "Enable Flight on Noclip",
+  "text.autoconfig.noclip.option.flight.enableFlightOnClip.@Tooltip[0]": "Whether to enable flight when entering",
+  "text.autoconfig.noclip.option.flight.enableFlightOnClip.@Tooltip[1]": "noclip mode",
+
+  "text.autoconfig.noclip.option.flight.flyingLocked": "Lock Flying in Noclip",
+  "text.autoconfig.noclip.option.flight.flyingLocked.@Tooltip[0]": "Whether the player is locked to fly",
+  "text.autoconfig.noclip.option.flight.flyingLocked.@Tooltip[1]": "when in noclip",
+
+  "text.autoconfig.noclip.option.keyBehaviors": "Key Behaviors",
+
+  "text.autoconfig.noclip.option.keyBehaviors.flightSpeedActivation": "Flight Speed Scroll Activation Key Behavior",
+  "text.autoconfig.noclip.option.keyBehaviors.flightSpeedActivation.@Tooltip[0]": "The behavior of the key binding to",
+  "text.autoconfig.noclip.option.keyBehaviors.flightSpeedActivation.@Tooltip[1]": "activate flight speed scrolling",
+
+  "text.autoconfig.noclip.option.keyBehaviors.noClip": "Noclip Key Behavior",
+  "text.autoconfig.noclip.option.keyBehaviors.noClip.@Tooltip[0]": "The behavior of the key binding to",
+  "text.autoconfig.noclip.option.keyBehaviors.noClip.@Tooltip[1]": "activate noclip",
+
+  "text.autoconfig.noclip.option.allowIn": "Allow Noclip In",
+  "text.autoconfig.noclip.option.allowIn.@Tooltip": "What game modes to allow noclip in",
+  "text.autoconfig.noclip.option.allowIn.survival": "Survival",
+  "text.autoconfig.noclip.option.allowIn.creative": "Creative",
+  "text.autoconfig.noclip.option.allowIn.adventure": "Adventure",
+  "text.autoconfig.noclip.option.allowIn.spectator": "Spectator"
 }

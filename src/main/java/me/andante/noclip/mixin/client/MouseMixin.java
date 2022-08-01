@@ -1,6 +1,7 @@
 package me.andante.noclip.mixin.client;
 
 import me.andante.noclip.api.NoClip;
+import me.andante.noclip.api.client.NoClipClient;
 import me.andante.noclip.api.client.keybinding.NoClipKeybindings;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -39,19 +40,21 @@ public class MouseMixin {
         cancellable = true
     )
     private void onMouseScroll(long window, double horizontal, double vertical, CallbackInfo ci, double scroll, int delta) {
-        if (NoClipKeybindings.ENABLE_CREATIVE_FLIGHT_SPEED_SCROLL.isPressed() && this.client.interactionManager.getCurrentGameMode().isCreative()) {
+        if (NoClipKeybindings.ACTIVATE_FLIGHT_SPEED_SCROLL.isPressed()) {
             PlayerAbilities abilities = this.client.player.getAbilities();
-            float old = abilities.getFlySpeed();
+            if (abilities.flying) {
+                float old = abilities.getFlySpeed();
 
-            float speed = MathHelper.clamp(old + (delta * 0.005f), 0.0f, 0.2f);
-            abilities.setFlySpeed(speed);
+                float speed = MathHelper.clamp(old + (delta * 0.005f), 0.0f, NoClipClient.getConfig().flight.maxScrolledSpeed / 20f);
+                abilities.setFlySpeed(speed);
 
-            if (old != speed) {
-                PlayerAbilities def = new PlayerAbilities();
-                this.client.player.sendMessage(Text.translatable(SET_FLIGHT_SPEED_KEY, String.format("%.1f", speed / def.getFlySpeed())), true);
+                if (old != speed) {
+                    PlayerAbilities def = new PlayerAbilities();
+                    this.client.player.sendMessage(Text.translatable(SET_FLIGHT_SPEED_KEY, String.format("%.1f", speed / def.getFlySpeed())).setStyle(NoClipClient.getTextStyle()), true);
+                }
+
+                ci.cancel();
             }
-
-            ci.cancel();
         }
     }
 }

@@ -15,6 +15,8 @@ import net.minecraft.server.network.ServerPlayerEntity;
 public final class NoClipImpl implements NoClip, ModInitializer {
     @Override
     public void onInitialize() {
+        LOGGER.info("Initializing {}", MOD_NAME);
+
         // networking
         ServerPlayNetworking.registerGlobalReceiver(PACKET_ID, this::receiveUpdate);
         ServerPlayConnectionEvents.JOIN.register(this::onPlayerJoin);
