@@ -16,6 +16,8 @@ public interface KeyBindingAccessor {
 
     @Accessor InputUtil.Key getBoundKey();
 
+    @Accessor void setPressed(boolean pressed);
+
     @Accessor int getTimesPressed();
     @Accessor void setTimesPressed(int timesPressed);
 }

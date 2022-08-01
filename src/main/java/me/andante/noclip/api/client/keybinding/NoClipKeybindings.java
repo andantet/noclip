@@ -19,7 +19,7 @@ import java.util.function.Function;
 public interface NoClipKeybindings {
     String CATEGORY = "key.category." + NoClip.MOD_ID;
 
-    KeyBinding TOGGLE_NOCLIP = KeyBindingHelper.registerKeyBinding(new ToggleNoClipKeyBinding(
+    ToggleNoClipKeyBinding TOGGLE_NOCLIP = (ToggleNoClipKeyBinding) KeyBindingHelper.registerKeyBinding(new ToggleNoClipKeyBinding(
         "key." + NoClip.MOD_ID + ".toggle_noclip",
         InputUtil.GLFW_KEY_GRAVE_ACCENT, CATEGORY, toggles(behaviors -> behaviors.noClip)
     ));

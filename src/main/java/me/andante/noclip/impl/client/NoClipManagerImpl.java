@@ -2,6 +2,7 @@ package me.andante.noclip.impl.client;
 
 import me.andante.noclip.api.NoClip;
 import me.andante.noclip.api.client.NoClipManager;
+import me.andante.noclip.api.client.keybinding.NoClipKeybindings;
 import me.andante.noclip.impl.ClippingEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -65,6 +66,7 @@ public final class NoClipManagerImpl implements NoClipManager {
         NoClipManager clipping = NoClipManager.INSTANCE;
         clipping.setCanClip(true);
         clipping.setClipping(buf.readBoolean());
+        NoClipKeybindings.TOGGLE_NOCLIP.forceSetPressed(true);
     }
 
     /**
@@ -74,5 +76,6 @@ public final class NoClipManagerImpl implements NoClipManager {
         NoClipManager clipping = NoClipManager.INSTANCE;
         clipping.setClipping(false);
         clipping.setCanClip(false);
+        NoClipKeybindings.TOGGLE_NOCLIP.forceSetPressed(false);
     }
 }
