@@ -87,7 +87,7 @@ public class NoClipConfig implements ConfigData {
     public AllowIn allowIn = new AllowIn();
 
     public static class AllowIn {
-        public boolean survival, creative = true, adventure, spectator;
+        public boolean survival = true, creative = true, adventure = true, spectator = true;
     }
 
     public static ConfigHolder<NoClipConfig> initialize() {
