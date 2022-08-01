@@ -10,17 +10,20 @@
     "GameModeMixin",
     "PlayerAbilitiesMixin",
     "PlayerEntityMixin",
-    "ProjectileUtilMixin"
+    "ProjectileUtilMixin",
+    "client.KeyBindingAccessor"
   ],
   "client": [
     "client.BackgroundRendererMixin",
     "client.BubbleColumnSoundPlayerMixin",
     "client.ClientPlayerEntityMixin",
     "client.ClientPlayerInteractionManagerMixin",
+    "client.ControlsListWidgetKeyBindingEntryMixin",
     "client.DebugHudMixin",
     "client.EntityRenderDispatcherMixin",
     "client.GameRendererMixin",
     "client.InGameOverlayRendererMixin",
+    "client.KeyBindingMixin",
     "client.MouseMixin",
     "client.WorldRendererMixin"
   ],
