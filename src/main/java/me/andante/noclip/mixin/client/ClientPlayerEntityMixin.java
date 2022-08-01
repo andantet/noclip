@@ -70,4 +70,21 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
         ClippingEntity clippingPlayer = ClippingEntity.cast(this);
         return clippingPlayer.isClipping() || sprinting;
     }
+
+    /**
+     * Fixes underwater vision when clipping to be that of spectator's.
+     */
+    @ModifyArg(
+        method = "tickMovement",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/util/math/MathHelper;clamp(III)I",
+            ordinal = 0
+        ),
+        index = 0
+    )
+    private int fixUnderwaterVision(int perTick) {
+        ClippingEntity clippingPlayer = ClippingEntity.cast(this);
+        return clippingPlayer.isClipping() ? perTick + (this.isSpectator() ? 0 : 10 - 1) : perTick;
+    }
 }
