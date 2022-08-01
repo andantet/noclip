@@ -49,7 +49,10 @@ public class NoClipHudRenderer extends DrawableHelper implements HudRenderCallba
         // calculate effects
         Collection<StatusEffectInstance> effects = client.player.getStatusEffects();
         boolean hasStatusEffect = effects.stream().anyMatch(StatusEffectInstance::shouldShowIcon);
-        boolean hasNonBeneficialEffect = effects.stream().map(StatusEffectInstance::getEffectType).anyMatch(Predicate.not(StatusEffect::isBeneficial));
+        boolean hasNonBeneficialEffect = effects.stream()
+                                                .filter(StatusEffectInstance::shouldShowIcon)
+                                                .map(StatusEffectInstance::getEffectType)
+                                                .anyMatch(Predicate.not(StatusEffect::isBeneficial));
 
         // render
         RenderSystem.setShaderTexture(0, TEXTURE);
