@@ -10,27 +10,12 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.GameOptions;
-import net.minecraft.client.option.KeyBinding;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.text.Text;
-import net.minecraft.util.Util;
 import net.minecraft.util.math.Vec3d;
-
-import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public final class NoClipKeybindingsImpl implements NoClipKeybindings {
-    public static final List<KeyBinding>
-        HORIZONTAL_MOVE = Util.make(() -> {
-        MinecraftClient client = MinecraftClient.getInstance();
-        GameOptions options = client.options;
-        return List.of(options.leftKey, options.rightKey, options.backKey, options.forwardKey);
-    }), VERTICAL_MOVE = Util.make(() -> {
-        MinecraftClient client = MinecraftClient.getInstance();
-        GameOptions options = client.options;
-        return List.of(options.sneakKey, options.jumpKey);
-    });
-
     private static final PlayerAbilities DEFAULT_ABILITIES = new PlayerAbilities();
     public static final String RESET_FLIGHT_SPEED_KEY = "text." + NoClip.MOD_ID + ".flight_speed.reset";
 
@@ -63,14 +48,23 @@ public final class NoClipKeybindingsImpl implements NoClipKeybindings {
 
         if (abilities.flying) {
             if (config.snappyFlight && (!config.snappyFlightRequiresClipping || clipping.isClipping())) {
-                if (HORIZONTAL_MOVE.stream().noneMatch(KeyBinding::isPressed)) {
-                    Vec3d velocity = player.getVelocity();
-                    player.setVelocity(0.0D, velocity.getY(), 0.0D);
-                }
-                if (VERTICAL_MOVE.stream().noneMatch(KeyBinding::isPressed)) {
-                    Vec3d velocity = player.getVelocity();
-                    player.setVelocity(velocity.getX(), 0.0D, velocity.getZ());
-                }
+                player.setVelocity(Vec3d.ZERO);
+
+                int sideways = 0;
+                int upward = 0;
+                int forward = 0;
+
+                GameOptions options = client.options;
+                if (options.leftKey.isPressed()) sideways += 1;
+                if (options.rightKey.isPressed()) sideways -= 1;
+                if (options.jumpKey.isPressed()) upward += 1;
+                if (options.sneakKey.isPressed()) upward -= 1;
+                if (options.forwardKey.isPressed()) forward += 1;
+                if (options.backKey.isPressed()) forward -= 1;
+
+                player.travel(new Vec3d(sideways, upward, forward));
+                player.setVelocity(player.getVelocity().multiply(7.0D));
+                player.addVelocity(0.0D, upward * abilities.getFlySpeed() * 2, 0.0D);
             }
         }
 
