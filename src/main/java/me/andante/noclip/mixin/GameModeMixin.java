@@ -27,8 +27,8 @@ public abstract class GameModeMixin {
                 this.setAbilities(def);
 
                 abilities.allowFlying = true;
+                abilities.invulnerable = true;
                 abilities.creativeMode = def.creativeMode;
-                abilities.invulnerable = def.invulnerable;
                 abilities.allowModifyWorld = def.allowModifyWorld;
 
                 ci.cancel();

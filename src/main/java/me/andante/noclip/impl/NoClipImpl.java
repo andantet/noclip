@@ -11,6 +11,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.world.GameMode;
 
 public final class NoClipImpl implements NoClip, ModInitializer {
     @Override
@@ -42,6 +43,9 @@ public final class NoClipImpl implements NoClip, ModInitializer {
         boolean clipping = buf.readBoolean();
         ClippingEntity clippingPlayer = ClippingEntity.cast(player);
         clippingPlayer.setClipping(clipping);
+
+        GameMode mode = player.interactionManager.getGameMode();
+        mode.setAbilities(player.getAbilities());
     }
 
     /**
