@@ -17,6 +17,7 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -51,5 +52,22 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
     private void onUpdateWaterSubmersionState(CallbackInfoReturnable<Boolean> cir) {
         ClippingEntity clippingPlayer = ClippingEntity.cast(this);
         if (clippingPlayer.isClipping()) cir.setReturnValue(this.isSubmergedInWater);
+    }
+
+    /**
+     * Prevents the player from having their sprinting stopped when clipping through water.
+     */
+    @ModifyArg(
+        method = "tickMovement",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/network/ClientPlayerEntity;setSprinting(Z)V",
+            ordinal = 3
+        ),
+        index = 0
+    )
+    private boolean preventStopSprinting(boolean sprinting) {
+        ClippingEntity clippingPlayer = ClippingEntity.cast(this);
+        return clippingPlayer.isClipping() || sprinting;
     }
 }
