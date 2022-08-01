@@ -48,7 +48,7 @@ public class MouseMixin {
                 float speed = MathHelper.clamp(old + (delta * 0.005f), 0.0f, NoClipClient.getConfig().flight.maxScrolledSpeed / 20f);
                 abilities.setFlySpeed(speed);
 
-                if (old != speed) {
+                if (old != speed && NoClipClient.getConfig().displaySpeedOnActionBar) {
                     PlayerAbilities def = new PlayerAbilities();
                     this.client.player.sendMessage(Text.translatable(SET_FLIGHT_SPEED_KEY, String.format("%.1f", speed / def.getFlySpeed())).setStyle(NoClipClient.getTextStyle()), true);
                 }

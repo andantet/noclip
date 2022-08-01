@@ -36,6 +36,10 @@ public class NoClipConfig implements ConfigData {
     @Excluded
     public int textColor = Formatting.GRAY.getColorValue();
 
+    @Comment("Whether or not to display speed updates on the action bar (above the hot bar)")
+    @Excluded
+    public boolean displaySpeedOnActionBar = true;
+
     @CollapsibleObject(startExpanded = true)
     public Flight flight = new Flight();
 
