@@ -16,7 +16,6 @@ import net.minecraft.util.math.Vec3d;
 
 @Environment(EnvType.CLIENT)
 public final class NoClipKeybindingsImpl implements NoClipKeybindings {
-    private static final PlayerAbilities DEFAULT_ABILITIES = new PlayerAbilities();
     public static final String RESET_FLIGHT_SPEED_KEY = "text." + NoClip.MOD_ID + ".flight_speed.reset";
 
     public static void onEndClientTick(MinecraftClient client) {
@@ -71,9 +70,9 @@ public final class NoClipKeybindingsImpl implements NoClipKeybindings {
         /* Flight Speed */
 
         if (RESET_FLIGHT_SPEED.wasPressed()) {
-            float speed = DEFAULT_ABILITIES.getFlySpeed();
-            abilities.setFlySpeed(speed);
-            player.sendMessage(Text.translatable(RESET_FLIGHT_SPEED_KEY, String.format("%.3f", speed)), true);
+            PlayerAbilities def = new PlayerAbilities();
+            abilities.setFlySpeed(def.getFlySpeed());
+            player.sendMessage(Text.translatable(RESET_FLIGHT_SPEED_KEY, 1.0f), true);
         }
     }
 }

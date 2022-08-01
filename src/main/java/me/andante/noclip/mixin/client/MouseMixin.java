@@ -46,7 +46,11 @@ public class MouseMixin {
             float speed = MathHelper.clamp(old + (delta * 0.005f), 0.0f, 0.2f);
             abilities.setFlySpeed(speed);
 
-            if (old != speed) this.client.player.sendMessage(Text.translatable(SET_FLIGHT_SPEED_KEY, String.format("%.3f", speed)), true);
+            if (old != speed) {
+                PlayerAbilities def = new PlayerAbilities();
+                this.client.player.sendMessage(Text.translatable(SET_FLIGHT_SPEED_KEY, String.format("%.1f", speed / def.getFlySpeed())), true);
+            }
+
             ci.cancel();
         }
     }
