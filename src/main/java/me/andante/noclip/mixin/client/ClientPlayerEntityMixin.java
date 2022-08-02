@@ -72,7 +72,7 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
     )
     private void preventStopSprinting(CallbackInfo ci) {
         ClippingEntity clippingPlayer = ClippingEntity.cast(this);
-        if (clippingPlayer.isClipping() && !this.input.hasForwardMovement()) this.setSprinting(false);
+        if (clippingPlayer.isClipping() && this.input.hasForwardMovement()) this.setSprinting(true);
     }
 
     /**
