@@ -40,7 +40,7 @@ public final class NoClipKeybindingsImpl implements NoClipKeybindings {
         if (clipping.canClip()) {
             GameMode mode = client.interactionManager.getCurrentGameMode();
             boolean prev = clipping.isClipping();
-            boolean curr = TOGGLE_NOCLIP.isPressed() && allowedModes.contains(mode);
+            boolean curr = ACTIVATE_NOCLIP.isPressed() && allowedModes.contains(mode);
             if (prev != curr) {
                 clipping.setClipping(curr);
                 clipping.updateClipping();

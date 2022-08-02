@@ -9,7 +9,7 @@
   "text.noclip.flight_speed.reset": "[noclip] Speed: %sx (reset)",
 
   "key.category.noclip": "noclip",
-  "key.noclip.toggle_noclip": "Toggle Clipping",
+  "key.noclip.activate_noclip": "Activate Noclip",
   "key.noclip.activate_flight_speed_scroll": "Activate Flight Speed Scroll",
   "key.noclip.reset_flight_speed": "Reset Flight Speed",
 
