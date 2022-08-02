@@ -31,14 +31,14 @@ public class NoClipConfig implements ConfigData {
     @Tooltip(count = 2)
     public boolean hudIcon = true;
 
+    @Comment("Whether or not to display speed updates on the action bar (above the hot bar)")
+    @Tooltip(count = 2)
+    public boolean displaySpeedOnActionBar = true;
+
     @Comment("The color of text displayed by the mod")
     @ColorPicker
     @Excluded
     public int textColor = Formatting.GRAY.getColorValue();
-
-    @Comment("Whether or not to display speed updates on the action bar (above the hot bar)")
-    @Excluded
-    public boolean displaySpeedOnActionBar = true;
 
     @CollapsibleObject(startExpanded = true)
     public Flight flight = new Flight();

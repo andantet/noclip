@@ -19,6 +19,10 @@
   "text.autoconfig.noclip.option.hudIcon.@Tooltip[0]": "Whether or not the icon displayed at",
   "text.autoconfig.noclip.option.hudIcon.@Tooltip[1]": "the top-right of the HUD is present",
 
+  "text.autoconfig.noclip.option.displaySpeedOnActionBar": "Display Speed Updates On Action Bar",
+  "text.autoconfig.noclip.option.displaySpeedOnActionBar.@Tooltip[0]": "Whether or not to display speed updates",
+  "text.autoconfig.noclip.option.displaySpeedOnActionBar.@Tooltip[1]": "on the action bar (above the hot bar)",
+
   "text.autoconfig.noclip.option.flight": "Flight",
 
   "text.autoconfig.noclip.option.flight.snappyFlight": "Snappy Flight",
