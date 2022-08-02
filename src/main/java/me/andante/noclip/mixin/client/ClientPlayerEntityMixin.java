@@ -14,9 +14,7 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.recipebook.ClientRecipeBook;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerAbilities;
-import net.minecraft.network.encryption.PlayerPublicKey;
 import net.minecraft.stat.StatHandler;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,8 +28,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity {
     @Shadow public Input input;
 
-    private ClientPlayerEntityMixin(ClientWorld world, GameProfile profile, @Nullable PlayerPublicKey publicKey) {
-        super(world, profile, publicKey);
+    private ClientPlayerEntityMixin(ClientWorld world, GameProfile profile) {
+        super(world, profile);
     }
 
     /**

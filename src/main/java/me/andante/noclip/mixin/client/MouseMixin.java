@@ -11,7 +11,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerAbilities;
-import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -62,7 +62,7 @@ public class MouseMixin {
 
         if (old != speed && NoClipClient.getConfig().display.showSpeedUpdatesOnActionBar) {
             PlayerAbilities def = new PlayerAbilities();
-            player.sendMessage(Text.translatable(SET_FLIGHT_SPEED_KEY, String.format("%.1f", speed / def.getFlySpeed())).setStyle(NoClipClient.getTextStyle()), true);
+            player.sendMessage(new TranslatableText(SET_FLIGHT_SPEED_KEY, String.format("%.1f", speed / def.getFlySpeed())).setStyle(NoClipClient.getTextStyle()), true);
         }
 
         ci.cancel();

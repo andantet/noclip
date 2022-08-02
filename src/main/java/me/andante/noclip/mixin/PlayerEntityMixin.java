@@ -12,7 +12,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.encryption.PlayerPublicKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
@@ -64,7 +63,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Clipping
      * Attaches the player to their {@link #abilities}.
      */
     @Inject(method = "<init>", at = @At("TAIL"))
-    private void onInit(World world, BlockPos pos, float yaw, GameProfile profile, PlayerPublicKey key, CallbackInfo ci) {
+    private void onInit(World world, BlockPos pos, float yaw, GameProfile profile, CallbackInfo ci) {
         PlayerEntity that = (PlayerEntity) (Object) this;
         ((PlayerAbilitiesAccess) this.abilities).setPlayer(that);
     }

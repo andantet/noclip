@@ -13,7 +13,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.entity.player.PlayerAbilities;
-import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
@@ -87,7 +87,7 @@ public final class NoClipKeyBindingsImpl implements NoClipKeyBindings {
         if (RESET_FLIGHT_SPEED.wasPressed()) {
             PlayerAbilities def = new PlayerAbilities();
             abilities.setFlySpeed(def.getFlySpeed());
-            player.sendMessage(Text.translatable(RESET_FLIGHT_SPEED_KEY, 1.0f).setStyle(NoClipClient.getTextStyle()), true);
+            player.sendMessage(new TranslatableText(RESET_FLIGHT_SPEED_KEY, 1.0f).setStyle(NoClipClient.getTextStyle()), true);
         }
     }
 

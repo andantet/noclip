@@ -1,6 +1,7 @@
 package me.andante.noclip.impl.client;
 
 import com.google.common.reflect.Reflection;
+import com.mojang.brigadier.CommandDispatcher;
 import me.andante.noclip.api.client.NoClipClient;
 import me.andante.noclip.api.client.NoClipManager;
 import me.andante.noclip.api.client.command.NoClipClientCommand;
@@ -10,11 +11,15 @@ import me.andante.noclip.impl.client.keybinding.NoClipKeyBindingsImpl;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+
+import java.util.List;
+import java.util.function.Consumer;
 
 @Environment(EnvType.CLIENT)
 public final class NoClipClientImpl implements NoClipClient, ClientModInitializer {
@@ -36,8 +41,8 @@ public final class NoClipClientImpl implements NoClipClient, ClientModInitialize
         HudRenderCallback.EVENT.register(NOCLIP_HUD_RENDERER);
 
         // command
-        ClientCommandRegistrationCallback.EVENT.register((dispatcher, access) -> {
-            NoClipClientCommand.register(dispatcher);
-        });
+        List.<Consumer<CommandDispatcher<FabricClientCommandSource>>>of(
+            NoClipClientCommand::register
+        ).forEach(o -> o.accept(ClientCommandManager.DISPATCHER));
     }
 }

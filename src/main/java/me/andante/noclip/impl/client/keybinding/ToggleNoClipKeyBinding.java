@@ -7,7 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.StickyKeyBinding;
-import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 
 import java.util.function.BooleanSupplier;
@@ -28,7 +28,7 @@ public class ToggleNoClipKeyBinding extends StickyKeyBinding {
             NoClipManager clipping = NoClipManager.INSTANCE;
             if (!clipping.canClip()) {
                 MinecraftClient client = MinecraftClient.getInstance();
-                client.player.sendMessage(Text.translatable(ACTIONBAR_KEY).formatted(Formatting.RED), true);
+                client.player.sendMessage(new TranslatableText(ACTIONBAR_KEY).formatted(Formatting.RED), true);
             }
         }
     }
