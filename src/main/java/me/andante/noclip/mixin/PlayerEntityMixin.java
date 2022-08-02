@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import me.andante.noclip.api.NoClip;
 import me.andante.noclip.impl.ClippingEntity;
 import me.andante.noclip.impl.PlayerAbilitiesAccess;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
@@ -21,7 +22,10 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
+@SuppressWarnings("InvalidInjectorMethodSignature")
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity implements ClippingEntity {
     @Shadow @Final private PlayerAbilities abilities;
@@ -84,7 +88,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Clipping
     }
 
     /**
-     * Prevents the player's pose from updating when noclipping.
+     * Prevents the player's pose from updating when clipping.
      */
     @Inject(method = "updatePose", at = @At("HEAD"), cancellable = true)
     private void onUpdatePose(CallbackInfo ci) {
@@ -92,6 +96,23 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Clipping
             this.setPose(EntityPose.STANDING);
             ci.cancel();
         }
+    }
+
+    /**
+     * Ignores ground checks for block breaking speed when clipping.
+     */
+    @Inject(
+        method = "getBlockBreakingSpeed",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/player/PlayerEntity;isSubmergedIn(Lnet/minecraft/tag/TagKey;)Z",
+            shift = At.Shift.BEFORE
+        ),
+        locals = LocalCapture.CAPTURE_FAILHARD,
+        cancellable = true
+    )
+    private void onGetBlockBreakingSpeed(BlockState block, CallbackInfoReturnable<Float> cir, float speed) {
+        if (this.isClipping()) cir.setReturnValue(speed);
     }
 
     /**
