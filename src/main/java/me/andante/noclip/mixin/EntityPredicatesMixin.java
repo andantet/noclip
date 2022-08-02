@@ -8,6 +8,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.function.Predicate;
+
 @Mixin(EntityPredicates.class)
 public class EntityPredicatesMixin {
     /**
@@ -19,5 +21,13 @@ public class EntityPredicatesMixin {
         if (cir.getReturnValueZ()) {
             if (entity instanceof ClippingEntity clippingEntity && clippingEntity.isClipping()) cir.setReturnValue(false);
         }
+    }
+
+    /**
+     * Removes collision entirely from clipping players.
+     */
+    @Inject(method = "canBePushedBy", at = @At("HEAD"), cancellable = true)
+    private static void onCanBePushedBy(Entity entity, CallbackInfoReturnable<Predicate<Entity>> cir) {
+        if (entity instanceof ClippingEntity clippingEntity && clippingEntity.isClipping()) cir.setReturnValue(e -> false);
     }
 }
