@@ -5,7 +5,7 @@ import me.andante.noclip.api.client.NoClipClient;
 import me.andante.noclip.api.client.NoClipManager;
 import me.andante.noclip.api.client.config.NoClipConfig;
 import me.andante.noclip.api.client.config.NoClipConfig.AllowIn;
-import me.andante.noclip.api.client.keybinding.NoClipKeybindings;
+import me.andante.noclip.api.client.keybinding.NoClipKeyBindings;
 import me.shedaniel.autoconfig.ConfigHolder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Environment(EnvType.CLIENT)
-public final class NoClipKeybindingsImpl implements NoClipKeybindings {
+public final class NoClipKeyBindingsImpl implements NoClipKeyBindings {
     public static final String RESET_FLIGHT_SPEED_KEY = "text." + NoClip.MOD_ID + ".flight_speed.reset";
     private static List<GameMode> allowedModes = createAllowedModes(NoClipClient.CONFIG.getConfig().allowIn);
 

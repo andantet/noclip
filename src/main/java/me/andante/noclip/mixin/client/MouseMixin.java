@@ -2,7 +2,7 @@ package me.andante.noclip.mixin.client;
 
 import me.andante.noclip.api.NoClip;
 import me.andante.noclip.api.client.NoClipClient;
-import me.andante.noclip.api.client.keybinding.NoClipKeybindings;
+import me.andante.noclip.api.client.keybinding.NoClipKeyBindings;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -40,7 +40,7 @@ public class MouseMixin {
         cancellable = true
     )
     private void onMouseScroll(long window, double horizontal, double vertical, CallbackInfo ci, double scroll, int delta) {
-        if (NoClipKeybindings.ACTIVATE_FLIGHT_SPEED_SCROLL.isPressed()) {
+        if (NoClipKeyBindings.ACTIVATE_FLIGHT_SPEED_SCROLL.isPressed()) {
             PlayerAbilities abilities = this.client.player.getAbilities();
             if (abilities.flying) {
                 float old = abilities.getFlySpeed();

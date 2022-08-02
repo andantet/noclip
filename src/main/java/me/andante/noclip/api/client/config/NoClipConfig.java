@@ -2,7 +2,7 @@ package me.andante.noclip.api.client.config;
 
 import me.andante.noclip.api.NoClip;
 import me.andante.noclip.api.client.NoClipClient;
-import me.andante.noclip.impl.client.keybinding.NoClipKeybindingsImpl;
+import me.andante.noclip.impl.client.keybinding.NoClipKeyBindingsImpl;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.ConfigHolder;
@@ -97,7 +97,7 @@ public class NoClipConfig implements ConfigData {
     public static ConfigHolder<NoClipConfig> initialize() {
         ServerLifecycleEvents.START_DATA_PACK_RELOAD.register((server, manager) -> NoClipClient.CONFIG.load());
         ConfigHolder<NoClipConfig> config = AutoConfig.register(NoClipConfig.class, JanksonConfigSerializer::new);
-        config.registerSaveListener(NoClipKeybindingsImpl::onConfigSave);
+        config.registerSaveListener(NoClipKeyBindingsImpl::onConfigSave);
         return config;
     }
 

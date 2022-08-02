@@ -1,6 +1,6 @@
 package me.andante.noclip.mixin.client;
 
-import me.andante.noclip.api.client.keybinding.NoClipKeybindings;
+import me.andante.noclip.api.client.keybinding.NoClipKeyBindings;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.option.ControlsListWidget;
@@ -23,7 +23,7 @@ public class ControlsListWidgetKeyBindingEntryMixin {
     @Shadow @Final private ButtonWidget editButton;
 
     /**
-     * Removes the error formatting from {@link NoClipKeybindings#ACTIVATE_FLIGHT_SPEED_SCROLL} and its co-binding.
+     * Removes the error formatting from {@link NoClipKeyBindings#ACTIVATE_FLIGHT_SPEED_SCROLL} and its co-binding.
      */
     @Inject(
         method = "render",
@@ -37,7 +37,7 @@ public class ControlsListWidgetKeyBindingEntryMixin {
     )
     private void onRender(MatrixStack matrices, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta, CallbackInfo ci, boolean selected, boolean incompatible) {
         if (incompatible) {
-            if (this.binding == NoClipKeybindings.ACTIVATE_FLIGHT_SPEED_SCROLL
+            if (this.binding == NoClipKeyBindings.ACTIVATE_FLIGHT_SPEED_SCROLL
                 || this.binding == KeyBindingAccessor.getKEY_TO_BINDINGS().get(((KeyBindingAccessor) this.binding).getBoundKey())
             ) this.editButton.setMessage(this.editButton.getMessage().copy().formatted(Formatting.WHITE));
         }

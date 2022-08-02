@@ -32,5 +32,9 @@ public interface NoClipManager {
     /**
      * Updates the client's player and notifies the server of the current clipping state.
      */
-    void updateClipping();
+    void updateClipping(boolean sendToServer);
+
+    default void updateClipping() {
+        updateClipping(true);
+    }
 }

@@ -1,8 +1,9 @@
 package me.andante.noclip.impl.client;
 
 import me.andante.noclip.api.NoClip;
+import me.andante.noclip.api.client.NoClipClient;
 import me.andante.noclip.api.client.NoClipManager;
-import me.andante.noclip.api.client.keybinding.NoClipKeybindings;
+import me.andante.noclip.api.client.keybinding.NoClipKeyBindings;
 import me.andante.noclip.impl.ClippingEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -41,7 +42,7 @@ public final class NoClipManagerImpl implements NoClipManager {
     }
 
     @Override
-    public void updateClipping() {
+    public void updateClipping(boolean sendToServer) {
         boolean clipping = this.isClipping();
 
         // update client player
@@ -51,10 +52,11 @@ public final class NoClipManagerImpl implements NoClipManager {
             clippingPlayer.setClipping(clipping);
         }
 
-        // send to server
-        PacketByteBuf buf = PacketByteBufs.create();
-        buf.writeBoolean(clipping);
-        ClientPlayNetworking.send(NoClip.PACKET_ID, buf);
+        if (sendToServer) {
+            PacketByteBuf buf = PacketByteBufs.create();
+            buf.writeBoolean(clipping);
+            ClientPlayNetworking.send(NoClip.PACKET_ID, buf);
+        }
     }
 
     /* Events */
@@ -63,19 +65,24 @@ public final class NoClipManagerImpl implements NoClipManager {
      * Receives a clipping update from the server.
      */
     public static void onServerUpdate(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender sender) {
-        NoClipManager clipping = NoClipManager.INSTANCE;
-        clipping.setCanClip(true);
-        clipping.setClipping(buf.readBoolean());
-        NoClipKeybindings.ACTIVATE_NOCLIP.forceSetPressed(true);
+        if (NoClipClient.getConfig().keyBehaviors.noClip.toggles()) {
+            boolean clipping = buf.readBoolean();
+
+            NoClipManager clipManager = NoClipManager.INSTANCE;
+            clipManager.setCanClip(true);
+            clipManager.setClipping(clipping);
+            clipManager.updateClipping(false);
+            if (NoClipKeyBindings.ACTIVATE_NOCLIP.isPressed() != clipping) NoClipKeyBindings.ACTIVATE_NOCLIP.setPressed(true);
+        }
     }
 
     /**
      * Resets clipping value upon disconnecting a server.
      */
     public static void onDisconnect(ClientPlayNetworkHandler handler, MinecraftClient client) {
-        NoClipManager clipping = NoClipManager.INSTANCE;
-        clipping.setClipping(false);
-        clipping.setCanClip(false);
-        NoClipKeybindings.ACTIVATE_NOCLIP.forceSetPressed(false);
+        NoClipManager clipManager = NoClipManager.INSTANCE;
+        clipManager.setCanClip(false);
+        clipManager.setClipping(false);
+        NoClipKeyBindings.ACTIVATE_NOCLIP.setPressed(false);
     }
 }

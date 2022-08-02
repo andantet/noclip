@@ -7,7 +7,7 @@ import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import me.andante.noclip.api.NoClip;
 import me.andante.noclip.api.client.NoClipClient;
 import me.andante.noclip.api.client.config.NoClipConfig;
-import me.andante.noclip.api.client.keybinding.NoClipKeybindings;
+import me.andante.noclip.api.client.keybinding.NoClipKeyBindings;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -37,8 +37,8 @@ public interface NoClipClientCommand {
 
     static int execute(CommandContext<FabricClientCommandSource> context) throws CommandSyntaxException {
         if (!NoClipClient.getConfig().keyBehaviors.noClip.toggles()) throw TOGGLE_EXCEPTION.create();
-        NoClipKeybindings.ACTIVATE_NOCLIP.forceSetPressed(true);
-        return !NoClipKeybindings.ACTIVATE_NOCLIP.isPressed() ? 1 : 0;
+        NoClipKeyBindings.ACTIVATE_NOCLIP.forceSetPressed(true);
+        return !NoClipKeyBindings.ACTIVATE_NOCLIP.isPressed() ? 1 : 0;
     }
 
     static int executeConfig(CommandContext<FabricClientCommandSource> context) {

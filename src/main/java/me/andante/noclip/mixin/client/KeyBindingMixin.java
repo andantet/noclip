@@ -1,6 +1,6 @@
 package me.andante.noclip.mixin.client;
 
-import me.andante.noclip.api.client.keybinding.NoClipKeybindings;
+import me.andante.noclip.api.client.keybinding.NoClipKeyBindings;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.option.KeyBinding;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Map;
 
 /**
- * An incredible mixin that prevents {@link NoClipKeybindings#ACTIVATE_FLIGHT_SPEED_SCROLL} from
+ * An incredible mixin that prevents {@link NoClipKeyBindings#ACTIVATE_FLIGHT_SPEED_SCROLL} from
  * being added to relevant maps that the game loops through to set key states, and runs its own
  * logic instead.
  */
@@ -40,7 +40,7 @@ public abstract class KeyBindingMixin {
     )
     private <V> V onInitAddToKeyBindings(V value) {
         KeyBinding that = (KeyBinding) (Object) this;
-        if (that == NoClipKeybindings.ACTIVATE_FLIGHT_SPEED_SCROLL) {
+        if (that == NoClipKeyBindings.ACTIVATE_FLIGHT_SPEED_SCROLL) {
             return (V) KEY_TO_BINDINGS.get(this.boundKey);
         }
 
@@ -58,7 +58,7 @@ public abstract class KeyBindingMixin {
     )
     private static <V> V onUpdateKeysByCodeAddToKeyBindings(V value) {
         KeyBinding keyBinding = (KeyBinding) value;
-        if (keyBinding == NoClipKeybindings.ACTIVATE_FLIGHT_SPEED_SCROLL) {
+        if (keyBinding == NoClipKeyBindings.ACTIVATE_FLIGHT_SPEED_SCROLL) {
             KeyBindingAccessor access = (KeyBindingAccessor) keyBinding;
             return (V) KEY_TO_BINDINGS.get(access.getBoundKey());
         }
@@ -70,14 +70,14 @@ public abstract class KeyBindingMixin {
 
     @Inject(method = "onKeyPressed", at = @At("HEAD"))
     private static void onOnKeyPressed(InputUtil.Key key, CallbackInfo ci) {
-        KeyBinding keyBinding = NoClipKeybindings.ACTIVATE_FLIGHT_SPEED_SCROLL;
+        KeyBinding keyBinding = NoClipKeyBindings.ACTIVATE_FLIGHT_SPEED_SCROLL;
         KeyBindingAccessor access = (KeyBindingAccessor) keyBinding;
         if (access.getBoundKey() == key) access.setTimesPressed(access.getTimesPressed() + 1);
     }
 
     @Inject(method = "setKeyPressed", at = @At("HEAD"))
     private static void onSetKeyPressed(InputUtil.Key key, boolean pressed, CallbackInfo ci) {
-        KeyBinding keyBinding = NoClipKeybindings.ACTIVATE_FLIGHT_SPEED_SCROLL;
+        KeyBinding keyBinding = NoClipKeyBindings.ACTIVATE_FLIGHT_SPEED_SCROLL;
         KeyBindingAccessor access = (KeyBindingAccessor) keyBinding;
         if (access.getBoundKey() == key) keyBinding.setPressed(pressed);
     }

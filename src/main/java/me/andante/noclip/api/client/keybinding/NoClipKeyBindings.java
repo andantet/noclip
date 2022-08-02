@@ -16,7 +16,7 @@ import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 
 @Environment(EnvType.CLIENT)
-public interface NoClipKeybindings {
+public interface NoClipKeyBindings {
     String CATEGORY = "key.category." + NoClip.MOD_ID;
 
     ToggleNoClipKeyBinding ACTIVATE_NOCLIP = (ToggleNoClipKeyBinding) KeyBindingHelper.registerKeyBinding(new ToggleNoClipKeyBinding(
