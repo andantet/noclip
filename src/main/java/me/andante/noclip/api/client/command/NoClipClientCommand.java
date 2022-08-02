@@ -35,8 +35,9 @@ public interface NoClipClientCommand {
     }
 
     static int execute(CommandContext<FabricClientCommandSource> context) {
-        NoClipKeybindings.ACTIVATE_NOCLIP.setPressed(true);
-        return !NoClipKeybindings.ACTIVATE_NOCLIP.isPressed() ? 1 : 0;
+        boolean pressed = !NoClipKeybindings.ACTIVATE_NOCLIP.isPressed();
+        NoClipKeybindings.ACTIVATE_NOCLIP.forceSetPressed(pressed);
+        return pressed ? 1 : 0;
     }
 
     static int executeConfig(CommandContext<FabricClientCommandSource> context) {
