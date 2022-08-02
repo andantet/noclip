@@ -16,13 +16,15 @@
 
   "text.autoconfig.noclip.title": "noclip",
 
-  "text.autoconfig.noclip.option.hudIcon": "Enable HUD Icon",
-  "text.autoconfig.noclip.option.hudIcon.@Tooltip[0]": "Whether or not the icon displayed at",
-  "text.autoconfig.noclip.option.hudIcon.@Tooltip[1]": "the top-right of the HUD is present",
+  "text.autoconfig.noclip.option.display": "Display",
 
-  "text.autoconfig.noclip.option.displaySpeedOnActionBar": "Display Speed Updates On Action Bar",
-  "text.autoconfig.noclip.option.displaySpeedOnActionBar.@Tooltip[0]": "Whether or not to display speed updates",
-  "text.autoconfig.noclip.option.displaySpeedOnActionBar.@Tooltip[1]": "on the action bar (above the hot bar)",
+  "text.autoconfig.noclip.option.display.hudIcon": "Enable HUD Icon",
+  "text.autoconfig.noclip.option.display.hudIcon.@Tooltip[0]": "Whether or not the icon displayed at",
+  "text.autoconfig.noclip.option.display.hudIcon.@Tooltip[1]": "the top-right of the HUD is present",
+
+  "text.autoconfig.noclip.option.display.showSpeedUpdatesOnActionBar": "Show Speed on Action Bar",
+  "text.autoconfig.noclip.option.display.showSpeedUpdatesOnActionBar.@Tooltip[0]": "Whether or not to display speed updates",
+  "text.autoconfig.noclip.option.display.showSpeedUpdatesOnActionBar.@Tooltip[1]": "on the action bar (above the hotbar)",
 
   "text.autoconfig.noclip.option.flight": "Flight",
 
@@ -31,17 +33,21 @@
 
   "text.autoconfig.noclip.option.flight.snappyFlight.enabled": "Enabled",
 
-  "text.autoconfig.noclip.option.flight.snappyFlight.onlyInNoClip": "Only In Noclip",
+  "text.autoconfig.noclip.option.flight.snappyFlight.onlyInNoClip": "Only in Noclip",
   "text.autoconfig.noclip.option.flight.snappyFlight.onlyInNoClip.@Tooltip[0]": "Whether snappy flight is only active",
   "text.autoconfig.noclip.option.flight.snappyFlight.onlyInNoClip.@Tooltip[1]": "when the player is in noclip",
 
-  "text.autoconfig.noclip.option.flight.maxScrolledSpeed": "Max Scrolled Speed",
-  "text.autoconfig.noclip.option.flight.maxScrolledSpeed.@Tooltip[0]": "The maximum value the flight speed",
-  "text.autoconfig.noclip.option.flight.maxScrolledSpeed.@Tooltip[1]": "scroll can be set to",
+  "text.autoconfig.noclip.option.flight.speedScrolling": "Speed Scrolling",
+  "text.autoconfig.noclip.option.flight.speedScrolling.@Tooltip[0]": "The ability to scroll in non-spectator game",
+  "text.autoconfig.noclip.option.flight.speedScrolling.@Tooltip[1]": "modes to change your flight speed",
 
-  "text.autoconfig.noclip.option.flight.resetScrolledSpeedOnClip": "Reset Scrolled Speed On Disable Noclip",
-  "text.autoconfig.noclip.option.flight.resetScrolledSpeedOnClip.@Tooltip[0]": "Whether or not to reset the flight speed",
-  "text.autoconfig.noclip.option.flight.resetScrolledSpeedOnClip.@Tooltip[1]": "scroll when disabling noclip mode",
+  "text.autoconfig.noclip.option.flight.speedScrolling.maxSpeed": "Maximum Speed",
+  "text.autoconfig.noclip.option.flight.speedScrolling.maxSpeed.@Tooltip[0]": "The maximum value the flight speed",
+  "text.autoconfig.noclip.option.flight.speedScrolling.maxSpeed.@Tooltip[1]": "scroll can be set to",
+
+  "text.autoconfig.noclip.option.flight.speedScrolling.resetSpeedOnClip": "Reset Speed on Disable Noclip",
+  "text.autoconfig.noclip.option.flight.speedScrolling.resetSpeedOnClip.@Tooltip[0]": "Whether or not to reset the flight speed",
+  "text.autoconfig.noclip.option.flight.speedScrolling.resetSpeedOnClip.@Tooltip[1]": "scroll when disabling noclip mode",
 
   "text.autoconfig.noclip.option.flight.enableFlightOnClip": "Enable Flight on Noclip",
   "text.autoconfig.noclip.option.flight.enableFlightOnClip.@Tooltip[0]": "Whether to enable flight when entering",

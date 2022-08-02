@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 @Environment(EnvType.CLIENT)
 public interface NoClipClient extends NoClip {
     ConfigHolder<NoClipConfig> CONFIG = NoClipConfig.initialize();
-    Supplier<Style> TEXT_STYLE = () -> Style.EMPTY.withColor(getConfig().textColor);
+    Supplier<Style> TEXT_STYLE = () -> Style.EMPTY.withColor(getConfig().display.textColor);
 
     static NoClipConfig getConfig() {
         return CONFIG.getConfig();

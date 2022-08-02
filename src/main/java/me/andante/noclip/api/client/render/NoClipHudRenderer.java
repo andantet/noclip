@@ -37,7 +37,7 @@ public class NoClipHudRenderer extends DrawableHelper implements HudRenderCallba
 
     @Override
     public void onHudRender(MatrixStack matrices, float tickDelta) {
-        if (!NoClipManager.INSTANCE.isClipping() || !NoClipClient.getConfig().hudIcon) {
+        if (!NoClipManager.INSTANCE.isClipping() || !NoClipClient.getConfig().display.hudIcon) {
             this.fade = -1;
             return;
         }

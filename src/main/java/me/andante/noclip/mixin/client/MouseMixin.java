@@ -2,11 +2,14 @@ package me.andante.noclip.mixin.client;
 
 import me.andante.noclip.api.NoClip;
 import me.andante.noclip.api.client.NoClipClient;
+import me.andante.noclip.api.client.config.NoClipConfig;
 import me.andante.noclip.api.client.keybinding.NoClipKeyBindings;
+import me.andante.noclip.impl.ClippingEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
@@ -40,21 +43,28 @@ public class MouseMixin {
         cancellable = true
     )
     private void onMouseScroll(long window, double horizontal, double vertical, CallbackInfo ci, double scroll, int delta) {
-        if (NoClipKeyBindings.ACTIVATE_FLIGHT_SPEED_SCROLL.isPressed()) {
-            PlayerAbilities abilities = this.client.player.getAbilities();
-            if (abilities.flying) {
-                float old = abilities.getFlySpeed();
+        if (!NoClipKeyBindings.ACTIVATE_FLIGHT_SPEED_SCROLL.isPressed()) return;
 
-                float speed = MathHelper.clamp(old + (delta * 0.005f), 0.0f, NoClipClient.getConfig().flight.maxScrolledSpeed / 20f);
-                abilities.setFlySpeed(speed);
+        NoClipConfig config = NoClipClient.getConfig();
+        ClientPlayerEntity player = this.client.player;
+        ClippingEntity clippingPlayer = ClippingEntity.cast(player);
 
-                if (old != speed && NoClipClient.getConfig().displaySpeedOnActionBar) {
-                    PlayerAbilities def = new PlayerAbilities();
-                    this.client.player.sendMessage(Text.translatable(SET_FLIGHT_SPEED_KEY, String.format("%.1f", speed / def.getFlySpeed())).setStyle(NoClipClient.getTextStyle()), true);
-                }
+        if (config.flight.speedScrolling.onlyInNoClip && !clippingPlayer.isClipping()) return;
 
-                ci.cancel();
-            }
+        PlayerAbilities abilities = player.getAbilities();
+
+        if (!abilities.flying) return;
+
+        float old = abilities.getFlySpeed();
+
+        float speed = MathHelper.clamp(old + (delta * 0.005f), 0.0f, config.flight.speedScrolling.maxSpeed / 20f);
+        abilities.setFlySpeed(speed);
+
+        if (old != speed && NoClipClient.getConfig().display.showSpeedUpdatesOnActionBar) {
+            PlayerAbilities def = new PlayerAbilities();
+            player.sendMessage(Text.translatable(SET_FLIGHT_SPEED_KEY, String.format("%.1f", speed / def.getFlySpeed())).setStyle(NoClipClient.getTextStyle()), true);
         }
+
+        ci.cancel();
     }
 }

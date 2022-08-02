@@ -27,18 +27,23 @@ import net.minecraft.util.Formatting;
 @Background(Background.TRANSPARENT)
 @Config(name = NoClip.MOD_ID)
 public class NoClipConfig implements ConfigData {
-    @Comment("Whether or not the icon displayed at the top-right of the HUD is present")
-    @Tooltip(count = 2)
-    public boolean hudIcon = true;
+    @CollapsibleObject(startExpanded = true)
+    public Display display = new Display();
 
-    @Comment("Whether or not to display speed updates on the action bar (above the hot bar)")
-    @Tooltip(count = 2)
-    public boolean displaySpeedOnActionBar = true;
+    public static class Display {
+        @Comment("Whether or not the icon displayed at the top-right of the HUD is present")
+        @Tooltip(count = 2)
+        public boolean hudIcon = true;
 
-    @Comment("The color of text displayed by the mod")
-    @ColorPicker
-    @Excluded
-    public int textColor = Formatting.GRAY.getColorValue();
+        @Comment("Whether or not to display speed updates on the action bar (above the hot bar)")
+        @Tooltip(count = 2)
+        public boolean showSpeedUpdatesOnActionBar = true;
+
+        @Comment("The color of text displayed by the mod")
+        @ColorPicker
+        @Excluded
+        public int textColor = Formatting.GRAY.getColorValue();
+    }
 
     @CollapsibleObject(startExpanded = true)
     public Flight flight = new Flight();
@@ -46,6 +51,7 @@ public class NoClipConfig implements ConfigData {
     public static class Flight {
         @Comment("Bedrock-like snappy flight movement")
         @CollapsibleObject(startExpanded = true)
+        @Tooltip
         public SnappyFlight snappyFlight = new SnappyFlight();
 
         public static final class SnappyFlight {
@@ -56,14 +62,25 @@ public class NoClipConfig implements ConfigData {
             public boolean onlyInNoClip = true;
         }
 
-        @Comment("The maximum value the flight speed scroll can be set to")
+        @Comment("The ability to scroll in non-spectator game modes to change your flight speed")
+        @CollapsibleObject(startExpanded = true)
         @Tooltip(count = 2)
-        @BoundedDiscrete(min = 4, max = Long.MAX_VALUE)
-        public float maxScrolledSpeed = 4;
+        public SpeedScrolling speedScrolling = new SpeedScrolling();
 
-        @Comment("Whether or not to reset the flight speed scroll when disabling noclip mode")
-        @Tooltip(count = 2)
-        public boolean resetScrolledSpeedOnClip = false;
+        public static final class SpeedScrolling {
+            @Comment("The maximum value the flight speed scroll can be set to")
+            @Tooltip(count = 2)
+            @BoundedDiscrete(min = 4, max = Long.MAX_VALUE)
+            public float maxSpeed = 4;
+
+            @Comment("Whether or not to reset the flight speed scroll when disabling noclip mode")
+            @Tooltip(count = 2)
+            public boolean resetSpeedOnClip = true;
+
+            @Comment("Whether speed scrolling is only active when the player is in noclip")
+            @Excluded
+            public boolean onlyInNoClip = true;
+        }
 
         @Comment("Whether to enable flight when entering noclip mode")
         @Tooltip(count = 2)
