@@ -10,7 +10,7 @@
 
   "name": "noclip",
   "icon": "assets/noclip/icon.png",
-  "description": "Adds a way to noclip in creative mode, like spectator mode",
+  "description": "Adds a way to noclip in any game mode, like spectator mode",
 
   "authors": [ "andante" ],
   "contact": {
