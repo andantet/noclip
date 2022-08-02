@@ -6,6 +6,7 @@ import me.andante.noclip.impl.ClippingEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.input.Input;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -15,6 +16,7 @@ import net.minecraft.network.encryption.PlayerPublicKey;
 import net.minecraft.stat.StatHandler;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -24,6 +26,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Environment(EnvType.CLIENT)
 @Mixin(ClientPlayerEntity.class)
 public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity {
+    @Shadow public Input input;
+
     private ClientPlayerEntityMixin(ClientWorld world, GameProfile profile, @Nullable PlayerPublicKey publicKey) {
         super(world, profile, publicKey);
     }
@@ -57,18 +61,18 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
     /**
      * Prevents the player from having their sprinting stopped when clipping through water.
      */
-    @ModifyArg(
+    @Inject(
         method = "tickMovement",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/network/ClientPlayerEntity;setSprinting(Z)V",
-            ordinal = 3
-        ),
-        index = 0
+            ordinal = 3,
+            shift = At.Shift.AFTER
+        )
     )
-    private boolean preventStopSprinting(boolean sprinting) {
+    private void preventStopSprinting(CallbackInfo ci) {
         ClippingEntity clippingPlayer = ClippingEntity.cast(this);
-        return clippingPlayer.isClipping() || sprinting;
+        if (clippingPlayer.isClipping() && !this.input.hasForwardMovement()) this.setSprinting(false);
     }
 
     /**
