@@ -73,12 +73,12 @@ public class NoClipConfig implements ConfigData {
             @BoundedDiscrete(min = 4, max = Long.MAX_VALUE)
             public float maxSpeed = 4;
 
-            @Comment("Whether or not to reset the flight speed scroll when disabling noclip mode")
-            @Tooltip(count = 2)
-            public boolean resetSpeedOnClip = true;
+            @Comment("Whether or not to reset the flight speed scroll when disabling noclip mode or coming out of flight, depending on the only in noclip option")
+            @Tooltip(count = 3)
+            public boolean resetSpeedOnClipOrFlight = true;
 
-            @Comment("Whether speed scrolling is only active when the player is in noclip")
-            @Excluded
+            @Comment("Whether speed scrolling is only allowed when the player is in noclip")
+            @Tooltip(count = 2)
             public boolean onlyInNoClip = true;
         }
 

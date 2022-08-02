@@ -45,9 +45,14 @@
   "text.autoconfig.noclip.option.flight.speedScrolling.maxSpeed.@Tooltip[0]": "The maximum value the flight speed",
   "text.autoconfig.noclip.option.flight.speedScrolling.maxSpeed.@Tooltip[1]": "scroll can be set to",
 
-  "text.autoconfig.noclip.option.flight.speedScrolling.resetSpeedOnClip": "Reset Speed on Disable Noclip",
-  "text.autoconfig.noclip.option.flight.speedScrolling.resetSpeedOnClip.@Tooltip[0]": "Whether or not to reset the flight speed",
-  "text.autoconfig.noclip.option.flight.speedScrolling.resetSpeedOnClip.@Tooltip[1]": "scroll when disabling noclip mode",
+  "text.autoconfig.noclip.option.flight.speedScrolling.resetSpeedOnClipOrFlight": "Reset Speed on Disable Noclip or Flight",
+  "text.autoconfig.noclip.option.flight.speedScrolling.resetSpeedOnClipOrFlight.@Tooltip[0]": "Whether or not to reset the flight speed scroll",
+  "text.autoconfig.noclip.option.flight.speedScrolling.resetSpeedOnClipOrFlight.@Tooltip[1]": "when disabling noclip mode or coming out of",
+  "text.autoconfig.noclip.option.flight.speedScrolling.resetSpeedOnClipOrFlight.@Tooltip[2]": "flight, depending on the 'Only in Noclip' option",
+
+  "text.autoconfig.noclip.option.flight.speedScrolling.onlyInNoClip": "Only in Noclip",
+  "text.autoconfig.noclip.option.flight.speedScrolling.onlyInNoClip.@Tooltip[0]": "Whether speed scrolling is only allowed",
+  "text.autoconfig.noclip.option.flight.speedScrolling.onlyInNoClip.@Tooltip[1]": "when the player is in noclip",
 
   "text.autoconfig.noclip.option.flight.enableFlightOnClip": "Enable Flight on Noclip",
   "text.autoconfig.noclip.option.flight.enableFlightOnClip.@Tooltip[0]": "Whether to enable flight when entering",
