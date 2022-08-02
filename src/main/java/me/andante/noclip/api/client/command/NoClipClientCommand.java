@@ -21,6 +21,7 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.*;
 public interface NoClipClientCommand {
     String CONFIG_RELOAD_KEY = "text.noclip.config_reload_successful";
     SimpleCommandExceptionType CONFIG_SYNTAX_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("text." + NoClip.MOD_ID + ".config_reload_syntax_error"));
+    SimpleCommandExceptionType TOGGLE_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("text." + NoClip.MOD_ID + ".not_toggle_error"));
 
     static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
         dispatcher.register(literal(NoClip.MOD_ID)
@@ -34,10 +35,10 @@ public interface NoClipClientCommand {
         );
     }
 
-    static int execute(CommandContext<FabricClientCommandSource> context) {
-        boolean pressed = !NoClipKeybindings.ACTIVATE_NOCLIP.isPressed();
-        NoClipKeybindings.ACTIVATE_NOCLIP.forceSetPressed(pressed);
-        return pressed ? 1 : 0;
+    static int execute(CommandContext<FabricClientCommandSource> context) throws CommandSyntaxException {
+        if (!NoClipClient.getConfig().keyBehaviors.noClip.toggles()) throw TOGGLE_EXCEPTION.create();
+        NoClipKeybindings.ACTIVATE_NOCLIP.forceSetPressed(true);
+        return !NoClipKeybindings.ACTIVATE_NOCLIP.isPressed() ? 1 : 0;
     }
 
     static int executeConfig(CommandContext<FabricClientCommandSource> context) {

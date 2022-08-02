@@ -4,6 +4,7 @@
   "text.noclip.server_noclip_not_present": "[noclip] You cannot clip on this server",
   "text.noclip.config_reload_successful": "[noclip] Config reloaded successfully",
   "text.noclip.config_reload_syntax_error": "[noclip] Error loading config: syntax error, check your logs",
+  "text.noclip.not_toggle_error": "[noclip] Could not toggle noclip: noclip key behavior is set to hold",
 
   "text.noclip.flight_speed.set": "[noclip] Speed: %sx",
   "text.noclip.flight_speed.reset": "[noclip] Speed: %sx (reset)",
