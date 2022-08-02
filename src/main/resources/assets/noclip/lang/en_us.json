@@ -39,6 +39,10 @@
   "text.autoconfig.noclip.option.flight.maxScrolledSpeed.@Tooltip[0]": "The maximum value the flight speed",
   "text.autoconfig.noclip.option.flight.maxScrolledSpeed.@Tooltip[1]": "scroll can be set to",
 
+  "text.autoconfig.noclip.option.flight.resetScrolledSpeedOnClip": "Reset Scrolled Speed On Disable Noclip",
+  "text.autoconfig.noclip.option.flight.resetScrolledSpeedOnClip.@Tooltip[0]": "Whether or not to reset the flight speed",
+  "text.autoconfig.noclip.option.flight.resetScrolledSpeedOnClip.@Tooltip[1]": "scroll when disabling noclip mode",
+
   "text.autoconfig.noclip.option.flight.enableFlightOnClip": "Enable Flight on Noclip",
   "text.autoconfig.noclip.option.flight.enableFlightOnClip.@Tooltip[0]": "Whether to enable flight when entering",
   "text.autoconfig.noclip.option.flight.enableFlightOnClip.@Tooltip[1]": "noclip mode",
@@ -49,11 +53,11 @@
 
   "text.autoconfig.noclip.option.keyBehaviors": "Key Behaviors",
 
-  "text.autoconfig.noclip.option.keyBehaviors.flightSpeedActivation": "Flight Speed Scroll Activation Key Behavior",
+  "text.autoconfig.noclip.option.keyBehaviors.flightSpeedActivation": "Activate Flight Speed Scroll",
   "text.autoconfig.noclip.option.keyBehaviors.flightSpeedActivation.@Tooltip[0]": "The behavior of the key binding to",
   "text.autoconfig.noclip.option.keyBehaviors.flightSpeedActivation.@Tooltip[1]": "activate flight speed scrolling",
 
-  "text.autoconfig.noclip.option.keyBehaviors.noClip": "Noclip Key Behavior",
+  "text.autoconfig.noclip.option.keyBehaviors.noClip": "Activate Noclip",
   "text.autoconfig.noclip.option.keyBehaviors.noClip.@Tooltip[0]": "The behavior of the key binding to",
   "text.autoconfig.noclip.option.keyBehaviors.noClip.@Tooltip[1]": "activate noclip",
 

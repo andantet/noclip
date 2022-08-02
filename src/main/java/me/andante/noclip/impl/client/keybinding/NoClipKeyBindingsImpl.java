@@ -46,8 +46,12 @@ public final class NoClipKeyBindingsImpl implements NoClipKeyBindings {
                 clipping.updateClipping();
 
                 if (curr) {
-                    // set flying
                     if (flightConfig.enableFlightOnClip) abilities.flying = true;
+                } else {
+                    if (flightConfig.resetScrolledSpeedOnClip) {
+                        PlayerAbilities def = new PlayerAbilities();
+                        abilities.setFlySpeed(def.getFlySpeed());
+                    }
                 }
 
                 mode.setAbilities(abilities);
