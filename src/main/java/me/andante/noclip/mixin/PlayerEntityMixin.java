@@ -21,7 +21,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity implements ClippingEntity {
@@ -87,19 +86,10 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Clipping
     /**
      * Prevents the player's pose from updating when noclipping.
      */
-    @Inject(
-        method = "updatePose",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/entity/player/PlayerEntity;isSpectator()Z",
-            shift = At.Shift.BEFORE
-        ),
-        locals = LocalCapture.CAPTURE_FAILHARD,
-        cancellable = true
-    )
-    private void onUpdatePose(CallbackInfo ci, EntityPose pose) {
+    @Inject(method = "updatePose", at = @At("HEAD"), cancellable = true)
+    private void onUpdatePose(CallbackInfo ci) {
         if (this.isClipping()) {
-            this.setPose(pose);
+            this.setPose(EntityPose.STANDING);
             ci.cancel();
         }
     }
