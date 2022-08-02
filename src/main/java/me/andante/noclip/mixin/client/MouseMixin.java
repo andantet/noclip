@@ -27,7 +27,7 @@ public class MouseMixin {
     @Shadow @Final private MinecraftClient client;
 
     /**
-     * Enables scrolling to modify fly speed when in creative and a key binding held or toggled.
+     * Enables scrolling to modify fly speed when in not in spectator and a key binding held or toggled.
      */
     @Inject(
         method = "onMouseScroll",
