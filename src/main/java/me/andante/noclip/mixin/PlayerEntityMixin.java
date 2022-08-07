@@ -84,6 +84,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Clipping
         if (this.isClipping()) {
             this.noClip = true;
             this.onGround = false;
+            this.fallDistance = 0;
         }
     }
 
