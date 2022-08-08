@@ -4,13 +4,16 @@ import me.andante.noclip.impl.ClippingEntity;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
-public class EntityMixin {
+public abstract class EntityMixin {
+    @Shadow public abstract boolean hasVehicle();
+
     /**
      * Makes pistons and shulker boxes ignore clipping entities.
      */
@@ -33,8 +36,10 @@ public class EntityMixin {
      * Cancels enabling sneak when clipping.
      */
     @Inject(method = "setSneaking", at = @At("HEAD"), cancellable = true)
-    private void onDoesRenderOnFire(boolean sneaking, CallbackInfo ci) {
+    private void onSetSneaking(boolean sneaking, CallbackInfo ci) {
         if (sneaking) {
+            if (this.hasVehicle()) return;
+
             Entity that = (Entity) (Object) this;
             if (that instanceof ClippingEntity clippingEntity && clippingEntity.isClipping()) ci.cancel();
         }
