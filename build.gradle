@@ -1,11 +1,11 @@
-buildscript { dependencies { classpath 'org.kohsuke:github-api:1.301' } }
+buildscript { dependencies { classpath 'org.kohsuke:github-api:1.307' } }
 
 plugins {
   id 'java-library'
   id 'idea'
   id 'eclipse'
 
-  id 'fabric-loom' version '0.12-SNAPSHOT'
+  id 'fabric-loom' version '0.13-SNAPSHOT'
   id 'maven-publish'
 
   id 'com.modrinth.minotaur' version '2.+'
