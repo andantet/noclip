@@ -142,15 +142,16 @@ task github(dependsOn: build) {
 
 import com.modrinth.minotaur.dependencies.*
 if (ENV.MODRINTH_TOKEN) modrinth {
-  token = ENV.MODRINTH_TOKEN
-  projectId = project.modrinth_id
+  token         = ENV.MODRINTH_TOKEN
+  projectId     = project.modrinth_id
   versionNumber = version
-  versionName = VER_NAME
-  versionType = project.release_type
-  changelog = CHANGELOG
-  uploadFile = remapJar
-  gameVersions = SUPPORTED_VERSIONS
-  dependencies = [
+  versionName   = VER_NAME
+  versionType   = project.release_type
+  changelog     = CHANGELOG
+  uploadFile    = remapJar
+  gameVersions  = SUPPORTED_VERSIONS
+  loaders       = [ "fabric", "quilt" ]
+  dependencies  = [
           new ModDependency("fabric-api", DependencyType.REQUIRED)
   ]
 }
@@ -160,11 +161,12 @@ if (ENV.CURSEFORGE_API_KEY) curseforge {
 
   project {
     id = project.curseforge_id
-    addGameVersion 'Fabric'
 
+    addGameVersion 'Fabric'
+    addGameVersion 'Quilt'
     for (final def cf_ver in SUPPORTED_VERSIONS) addGameVersion cf_ver
 
-    changelog = CHANGELOG
+    changelog   = CHANGELOG
     releaseType = project.release_type
 
     mainArtifact(remapJar) {
