@@ -13,8 +13,7 @@
     "LivingEntityMixin",
     "PlayerAbilitiesMixin",
     "PlayerEntityMixin",
-    "ProjectileUtilMixin",
-    "client.KeyBindingAccessor"
+    "ProjectileUtilMixin"
   ],
   "client": [
     "client.BackgroundRendererMixin",
@@ -26,6 +25,7 @@
     "client.EntityRenderDispatcherMixin",
     "client.GameRendererMixin",
     "client.InGameOverlayRendererMixin",
+    "client.KeyBindingAccessor",
     "client.KeyBindingMixin",
     "client.MouseMixin",
     "client.WorldRendererMixin"
