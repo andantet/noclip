@@ -12,7 +12,7 @@
   "icon": "assets/noclip/icon.png",
   "description": "Adds a way to noclip in any game mode, like spectator mode",
 
-  "authors": [ "andante" ],
+  "authors": [ "Andante" ],
   "contact": {
     "homepage": "https://curseforge.com/minecraft/mc-mods/noclip",
     "sources": "https://github.com/andantet/noclip-fabric",
