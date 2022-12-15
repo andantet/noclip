@@ -5,7 +5,6 @@
   "package": "me.andante.noclip.mixin",
   "mixins": [
     "AreaEffectCloudEntityMixin",
-    "EndGatewayBlockEntityMixin",
     "EntityMixin",
     "EntityPredicatesMixin",
     "ExplosionMixin",

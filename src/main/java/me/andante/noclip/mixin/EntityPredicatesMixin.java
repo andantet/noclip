@@ -23,6 +23,13 @@ public class EntityPredicatesMixin {
         }
     }
 
+    @Inject(method = "method_24517", at = @At("TAIL"), cancellable = true)
+    private static void onExceptSpectator(Entity entity, CallbackInfoReturnable<Boolean> cir) {
+        if (cir.getReturnValueZ()) {
+            if (entity instanceof ClippingEntity clippingEntity && clippingEntity.isClipping()) cir.setReturnValue(false);
+        }
+    }
+
     /**
      * Removes collision entirely from clipping players.
      */
