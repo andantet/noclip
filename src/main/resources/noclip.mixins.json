@@ -19,7 +19,6 @@
     "client.BubbleColumnSoundPlayerMixin",
     "client.ClientPlayerEntityMixin",
     "client.ClientPlayerInteractionManagerMixin",
-    "client.ControlsListWidgetKeyBindingEntryMixin",
     "client.DebugHudMixin",
     "client.EntityRenderDispatcherMixin",
     "client.GameRendererMixin",
