@@ -20,13 +20,14 @@ public class DebugHudMixin {
      * Captures the first line of the debug hud.
      */
     @ModifyArg(
-        method = "getRightText",
-        at = @At(
-            value = "INVOKE",
-            target = "Lcom/google/common/collect/Lists;newArrayList([Ljava/lang/Object;)Ljava/util/ArrayList;",
-            ordinal = 0
-        ),
-        index = 0
+            method = "getRightText",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lcom/google/common/collect/Lists;newArrayList([Ljava/lang/Object;)Ljava/util/ArrayList;",
+                    ordinal = 0,
+                    remap = false
+            ),
+            index = 0
     )
     private <E> E[] onGetLeftTextCaptureFirstDebugLine(E[] elements) {
         if (elements instanceof String[] strings) {
