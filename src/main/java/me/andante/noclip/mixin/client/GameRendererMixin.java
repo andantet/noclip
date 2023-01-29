@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Environment(EnvType.CLIENT)
-@Mixin(GameRenderer.class)
+@Mixin(value = GameRenderer.class, priority = 999)
 public class GameRendererMixin {
     @Shadow @Final MinecraftClient client;
 
