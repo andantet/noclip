@@ -12,8 +12,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.encryption.PlayerPublicKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -63,7 +65,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Clipping
      * Attaches the player to their {@link #abilities}.
      */
     @Inject(method = "<init>", at = @At("TAIL"))
-    private void onInit(World world, BlockPos pos, float yaw, GameProfile profile, CallbackInfo ci) {
+    private void onInit(World world, BlockPos pos, float yaw, GameProfile profile, @Nullable PlayerPublicKey key, CallbackInfo ci) {
         PlayerEntity that = (PlayerEntity) (Object) this;
         ((PlayerAbilitiesAccess) this.abilities).setPlayer(that);
     }
@@ -105,7 +107,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Clipping
         method = "getBlockBreakingSpeed",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/player/PlayerEntity;isSubmergedIn(Lnet/minecraft/registry/tag/TagKey;)Z",
+            target = "Lnet/minecraft/entity/player/PlayerEntity;isSubmergedIn(Lnet/minecraft/tag/TagKey;)Z",
             shift = At.Shift.BEFORE
         ),
         locals = LocalCapture.CAPTURE_FAILHARD,

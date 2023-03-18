@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Environment(EnvType.CLIENT)
 @Mixin(value = GameRenderer.class, priority = 999)
 public class GameRendererMixin {
-    @Shadow @Final MinecraftClient client;
+    @Shadow @Final private MinecraftClient client;
 
     /**
      * Fixes dark hand lighting when clipping and inside a block.
